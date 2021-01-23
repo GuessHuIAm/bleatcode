@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct problemset *new_set(){
+	struct problemset *set = malloc(sizeof(struct problemset));
+    	int i;
+    	for (i = 0; i < 20; i++)
+    	{
+        	(set->problems)[i] = new_problem(i);
+    	}
+    	return set;
+};
+
+void print_set(struct problemset *ps){
+	if (ps == NULL){
+		printf("Problem set is NULL\n");
+		return;
+    	}
+
+	int i;
+	struct problem *p;
+	for (i = 0; i < 20; i++){
+        	struct problem *p = ps->problems[i];
+        	print_problem(p);
+	}
+	return;
+};
