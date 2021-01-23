@@ -4,7 +4,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
-//#include "problemset.h"
+#include "problem.h"
+#include "problemset.h"
+#include "csv.h"
 
 void printproblems(){
 	printf("Problem #     Type          Completed?\n");
