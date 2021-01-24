@@ -12,21 +12,6 @@
 #include "csv.h"
 
 int solve(int num){
-}
-
-int try(int num){
-	char output[1024];
-	int c;
-	read(client, &output, sizeof(output));
-	printf("Here is the description for Problem %d:\n%s\n", num, output);
-	sleep(1);
-        printf("Do you want to try and solve Problem %d?\n", num);
-	sleep(0.5);
-	printf("(Press 'n' to go back to your problems. Press any other key to continue solving.)\n");
-	c = getchar(); // getting whatever scanf left behind
-	c = getchar();
-	if (c != 'n')
-		return -1; // go back
 	int status;
 	int f = fork();
 	if (!f){
@@ -42,7 +27,30 @@ int try(int num){
 		int pid = wait(&status);
 		printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
 		printf("\nParent: This parent process is finished. Bye!\n");
-	}	
+	}
+}
+
+int try(int num){
+	char output[1024];
+	int c;
+	read(client, &output, sizeof(output));
+	printf("Here is the description for Problem %d:\n%s\n", num, output);
+	sleep(1);
+        printf("Do you want to try and solve Problem %d?\n", num);
+	sleep(0.5);
+	printf("(Press 'n' to go back to your problems. Press any other key to continue solving.)\n");
+	c = getchar(); // getting whatever scanf left behind
+	c = getchar();
+	if (c != 'n')
+		return -1; // go back
+	int s = num;
+	while (s >= 0 && s < 20){
+		s = solve(num);
+	}
+	if (s == 100) // success
+		return num;
+	if (s == -1) // giving up
+		return -1;
 }
 
 int main(){
