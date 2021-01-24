@@ -49,7 +49,7 @@ int try(int num){
 	}
 	if (s == 100) // success
 		return num;
-	if (s == -1) // giving up
+	if (s < 0) // giving up
 		return -1;
 }
 
