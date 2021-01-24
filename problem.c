@@ -13,6 +13,3 @@ struct problem *new_problem(int num){
 void *solve(int num){
 	p->completion = 1;
 }
-
-void print_descriptor(int num){
-}
