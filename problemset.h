@@ -6,7 +6,7 @@ struct problemset {
 };
 
 struct problemset *new_set();
-void print_set(struct problemset *ps);
+void print_set(char *name, struct problemset *ps);
 void solve(struct problemset *ps, int id);
 
 #endif

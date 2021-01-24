@@ -13,11 +13,12 @@ struct problemset *new_set(){
 	return set;
 };
 
-void print_set(struct problemset *ps){
+void print_set(char *name, struct problemset *ps){
 	if (ps == NULL){
 		printf("Problem set is NULL\n");
 		return;
 	}
+	printf("%s's Problem Set!\n", name);
 
 	int i;
 	struct problem *p;

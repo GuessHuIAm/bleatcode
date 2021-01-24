@@ -28,14 +28,14 @@ int main(){
 	//client's intro / send user name to server
 	char name[32];
 	int c;
-	printf("Welcome to BleetCode!\n");
+	printf("\n---------------------\nWelcome to BleetCode!\n---------------------\n\n");
 	sleep(0.5);
 	printf("Before we begin...\n");
 	sleep(1);
 	while(1){
-		printf("What is your name?\n");
+		printf("\nWhat is your name? ");
 		scanf(" %32[^\n]", name);
-		printf("Is your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
+		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
 		c = getchar(); // getting whatever scanf left behind
 		c = getchar();
 		if (c != 'n')
@@ -46,7 +46,7 @@ int main(){
 	//client reads from server
     	char message[32];
 	read(client, message, sizeof(message));
-    	printf("Hello %s! The handshaking is complete. Let's get started!\n", message);
+    	printf("\nHello %s! The handshaking is complete. Let's get started!\n\n", message);
 
 	//client removes pipe
 	remove(clientN);
@@ -55,8 +55,9 @@ int main(){
 	//client sends back to server
     	write(server, "Hello!", sizeof("Hello!"));
 
+	//making the client's server
 	struct problemset *ps = new_set();
-	print_set(ps);
+	print_set(name, ps);
 
 	int input;
 	int output;

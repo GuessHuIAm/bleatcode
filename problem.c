@@ -17,6 +17,6 @@ void print_problem(struct problem *p){
 		c = '+';
 	else
 		c = '-';
-	printf("Problem %d / Completion Status: %c\n", p->id, c);
+	printf("Problem %d\tProblem Subject\t     Completion Status: %c\n", p->id, c);
 	return;
 }
