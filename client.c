@@ -63,12 +63,12 @@ int main(){
 	int output;
 
     	while(1){
-		//print_set(ps);
         	printf("Which problem do you want to attempt? Please enter a number: \n");
-        	scanf("%d", &input);
+        	scanf(" %d", &input);
 		write(server, &input, sizeof(input));
 
 		read(client, &output, sizeof(output));
+		printf("Here is what this problem:\n", output
         	printf("Do you want to solve Problem %d?\n", input);
 
 		int status;
