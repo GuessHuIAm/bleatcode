@@ -7,9 +7,9 @@
 #include <time.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-//#include "problem.h"
-//#include "problemset.h"
-//#include "csv.h"
+#include "problem.h"
+#include "problemset.h"
+#include "csv.h"
 
 int main(){
 	//client to server handshake
@@ -36,6 +36,8 @@ int main(){
 	//client sends back to server
     	write(server, "Hello!", sizeof("Hello!"));
 	printf("Client sent <Hello!>, the handshake is complete!\n");
+	
+	struct problem_set ps = new_set();
 
 	int input;
 	int output;
