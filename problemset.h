@@ -3,9 +3,10 @@
 
 struct problemset {
 	struct problem * problems[21];
-}
+};
 
 struct problemset *new_set();
 void print_set(struct problemset *ps);
+void solve(struct problemset *ps, int id);
 
 #endif

@@ -14,9 +14,9 @@ server.o: server.c problem.h problemset.h csv.h
 
 problem.o: problem.c csv.h
 	gcc -c problem.c
-	
+
 problemset.o: problemset.c csv.h
-	gcc -c problem.c
+	gcc -c problemset.c
 
 csv.o: csv.h
 	gcc -c csv.c

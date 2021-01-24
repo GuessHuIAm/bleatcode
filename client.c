@@ -20,30 +20,49 @@ int main(){
 	//client to server
     	int server = open("WKP", O_WRONLY);
     	write(server, clientN, sizeof(clientN));
-	printf("Waiting for connection...\n");
+	printf("Loading...\n");
 
 	int client = open(clientN, O_RDONLY);
-	printf("Server connected to client.\n");
+	printf("Loaded!\n");
+
+	//client's intro / send user name to server
+	char name[32];
+	int c;
+	printf("Welcome to BleetCode!\n");
+	sleep(0.5);
+	printf("Before we begin...\n");
+	sleep(1);
+	while(1){
+		printf("What is your name?\n");
+		scanf(" %32[^\n]", name);
+		printf("Is your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
+		c = getchar(); // getting whatever scanf left behind
+		c = getchar();
+		if (c != 'n')
+			break;
+	}
+	write(server, name, sizeof(name));
 
 	//client reads from server
     	char message[32];
 	read(client, message, sizeof(message));
-    	printf("Hello %s!\n", message);
+    	printf("Hello %s! The handshaking is complete. Let's get started!\n", message);
 
 	//client removes pipe
 	remove(clientN);
+	sleep(1);
 
 	//client sends back to server
     	write(server, "Hello!", sizeof("Hello!"));
-	printf("Client sent <Hello!>, the handshake is complete!\n");
-	
-	struct problem_set ps = new_set();
+
+	struct problemset *ps = new_set();
+	print_set(ps);
 
 	int input;
 	int output;
 
     	while(1){
-		printproblems();
+		//print_set(ps);
         	printf("Which problem do you want to attempt? Please enter a number: \n");
         	scanf("%d", &input);
 		write(server, &input, sizeof(input));

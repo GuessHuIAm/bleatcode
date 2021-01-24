@@ -22,13 +22,13 @@ int main() {
     		int client = open(clientN, O_WRONLY);
 		printf("Connected to client\n");
 
-    		write(client, "Howdy!", sizeof("Howdy!"));
-		printf("Acknowledgement <Howdy!> sent\n");
-
 		//server reads from client
-    		char message[32];
-    		read(server, message, sizeof(message));
-    		printf("Acknowledgement from client received <%s>\n", message);
+    		char name[32];
+    		read(server, name, sizeof(name));
+    		printf("Received client's name: %s.\n", name);
+
+		write(client, name, sizeof(name));
+                printf("Acknowledgement sent.\n");
 
 		int input = 0;
 		int answer = 0;

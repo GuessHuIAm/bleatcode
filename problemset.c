@@ -1,22 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "csv.h"
+#include "problem.h"
+#include "problemset.h"
 
 struct problemset *new_set(){
 	struct problemset *set = malloc(sizeof(struct problemset));
     	int i;
-    	for (i = 0; i < 20; i++)
-    	{
-        	(set->problems)[i] = new_problem(i);
-    	}
-    	return set;
+	for (i = 0; i < 20; i++)
+		(set->problems)[i] = new_problem(i);
+	return set;
 };
 
 void print_set(struct problemset *ps){
 	if (ps == NULL){
 		printf("Problem set is NULL\n");
 		return;
-    	}
+	}
 
 	int i;
 	struct problem *p;
@@ -24,5 +25,11 @@ void print_set(struct problemset *ps){
         	struct problem *p = ps->problems[i];
         	print_problem(p);
 	}
+	return;
+};
+
+void solve(struct problemset *ps, int id){
+	struct problem *p = ps->problems[id - 1];
+	p->completion = 1;
 	return;
 };

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "problem.h"
 
 struct problem *new_problem(int num){
 	struct problem *np;
@@ -10,6 +11,12 @@ struct problem *new_problem(int num){
 	return np;
 }
 
-void *solve(int num){
-	p->completion = 1;
+void print_problem(struct problem *p){
+	char c;
+	if (p->completion)
+		c = '+';
+	else
+		c = '-';
+	printf("Problem %d / Completion Status: %c\n", p->id, c);
+	return;
 }
