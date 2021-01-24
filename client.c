@@ -4,15 +4,12 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
-#include "problem.h"
-#include "problemset.h"
-#include "csv.h"
-
-void printproblems(){
-	printf("Problem #     Type          Completed?\n");
-	printf("%7d%11d%10d\n", 1, 1222, 9348);
-	printf("%7d%11d%10d\n", 2, 2111, 214);
-}
+#include <time.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+//#include "problem.h"
+//#include "problemset.h"
+//#include "csv.h"
 
 int main(){
 	//client to server handshake
@@ -50,8 +47,25 @@ int main(){
 		write(server, &input, sizeof(input));
 
 		read(client, &output, sizeof(output));
-        	printf("Do you want to solve this? %d\n", input, output);
- 	}
+        	printf("Do you want to solve Problem %d?\n", input);
+
+		int status;
+		int f = fork();
+		if (!f){
+			int pid = getpid();
+			char *cmd = "nano";
+			char *argv[3];
+			argv[0] = "nano";
+			argv[1] = "file.c";
+			argv[2] = NULL;
+			return execvp(cmd, argv);
+		}
+		else{
+			int pid = wait(&status);
+			printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
+			printf("\nParent: This parent process is finished. Bye!\n");
+		}
+	}
 
 	return 0;
 }
