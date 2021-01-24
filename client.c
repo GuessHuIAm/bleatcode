@@ -59,17 +59,25 @@ int main(){
 	struct problemset *ps = new_set();
 	print_set(name, ps);
 
-	int input;
-	int output;
+	int problem_number;
+	char output[1024];
 
     	while(1){
         	printf("Which problem do you want to attempt? Please enter a number: \n");
-        	scanf(" %d", &input);
-		write(server, &input, sizeof(input));
+        	scanf(" %d", &problem_number);
+		write(server, &problem_number, sizeof(problem_number));
 
+		if (1){
 		read(client, &output, sizeof(output));
-		printf("Here is what this problem:\n", output
-        	printf("Do you want to solve Problem %d?\n", input);
+		printf("Here is the description for Problem %d:\n%s\n", problem_number, output);
+		sleep(1);
+        	printf("Do you want to try and solve Problem %d?\n", problem_number);
+		sleep(0.5);
+		printf("(Press 'n' to go back to your problems. Press any other key to continue solving.)\n");
+                c = getchar(); // getting whatever scanf left behind
+		c = getchar();
+                if (c != 'n')
+                        break;
 
 		int status;
 		int f = fork();
