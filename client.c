@@ -11,6 +11,40 @@
 #include "problemset.h"
 #include "csv.h"
 
+int solve(int num){
+}
+
+int try(int num){
+	char output[1024];
+	int c;
+	read(client, &output, sizeof(output));
+	printf("Here is the description for Problem %d:\n%s\n", num, output);
+	sleep(1);
+        printf("Do you want to try and solve Problem %d?\n", num);
+	sleep(0.5);
+	printf("(Press 'n' to go back to your problems. Press any other key to continue solving.)\n");
+	c = getchar(); // getting whatever scanf left behind
+	c = getchar();
+	if (c != 'n')
+		return -1; // go back
+	int status;
+	int f = fork();
+	if (!f){
+		int pid = getpid();
+		char *cmd = "nano";
+		char *argv[3];
+		argv[0] = "nano";
+		argv[1] = "file.c";
+		argv[2] = NULL;
+		return execvp(cmd, argv);
+	}
+	else{
+		int pid = wait(&status);
+		printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
+		printf("\nParent: This parent process is finished. Bye!\n");
+	}	
+}
+
 int main(){
 	//client to server handshake
 	char clientN[32];
@@ -52,48 +86,21 @@ int main(){
 	remove(clientN);
 	sleep(1);
 
-	//client sends back to server
-    	write(server, "Hello!", sizeof("Hello!"));
-
-	//making the client's server
 	struct problemset *ps = new_set();
 	print_set(name, ps);
 
 	int problem_number;
-	char output[1024];
 
     	while(1){
         	printf("Which problem do you want to attempt? Please enter a number: \n");
         	scanf(" %d", &problem_number);
 		write(server, &problem_number, sizeof(problem_number));
 
-		if (1){
-		read(client, &output, sizeof(output));
-		printf("Here is the description for Problem %d:\n%s\n", problem_number, output);
-		sleep(1);
-        	printf("Do you want to try and solve Problem %d?\n", problem_number);
-		sleep(0.5);
-		printf("(Press 'n' to go back to your problems. Press any other key to continue solving.)\n");
-                c = getchar(); // getting whatever scanf left behind
-		c = getchar();
-                if (c != 'n')
-                        break;
-
-		int status;
-		int f = fork();
-		if (!f){
-			int pid = getpid();
-			char *cmd = "nano";
-			char *argv[3];
-			argv[0] = "nano";
-			argv[1] = "file.c";
-			argv[2] = NULL;
-			return execvp(cmd, argv);
-		}
-		else{
-			int pid = wait(&status);
-			printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
-			printf("\nParent: This parent process is finished. Bye!\n");
+		int result;
+		result = try(problem_number);
+		
+		if (result >= 0){
+			solve(ps, result);
 		}
 	}
 
