@@ -44,8 +44,8 @@ void handshake(){
 	int client = open(clientN, O_WRONLY);
 	printf("Connected to client.\n");
     	char message[] = "The handshake is complete. Let's get started!\n";
-    	write(server, message, sizeof(message));
-    	printf("Sent welcome message to client %s.\n", message);
+    	write(client, message, sizeof(message));
+    	printf("Sent welcome message to client %s.\n", clientN);
 	     
 	//Server receives client's message
 	char handshake[256];
