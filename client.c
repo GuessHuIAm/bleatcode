@@ -42,6 +42,8 @@ int solve_prob(int client, int server, int num){
 	int status;
 	int f = fork();
 	if (!f){
+		printf("Solving... \n");
+		sleep(1);
 		int pid = getpid();
 		char *cmd = "nano";
 		char *argv[3];
@@ -90,8 +92,6 @@ int try(int client, int server, int num){
 	int s = num;
 	while (s >= 0 && s < 20){
 		sleep(2);
-		printf("Solving... \n");
-		sleep(1);
 		s = solve_prob(client, server, num);
 	}
 	if (s == 100){ // success
