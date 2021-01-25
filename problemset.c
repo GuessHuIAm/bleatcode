@@ -30,7 +30,7 @@ void print_set(char *name, struct problemset *ps){
 };
 
 void solve(struct problemset *ps, int id){
-	struct problem *p = ps->problems[id - 1];
+	struct problem *p = ps->problems[id];
 	p->completion = 1;
 	return;
 };
