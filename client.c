@@ -46,10 +46,10 @@ int solve_prob(int client, int server, int num){
 }
 
 int try(int client, int server, int num){
-	char output[1024];
-	int c;
-	read(client, &output, sizeof(output));
-	printf("\nHere is the description for Problem %d:\n%s\n", num, output);
+	//char output[1024];
+	//int c;
+	//read(client, &output, sizeof(output));
+	printf("\nHere is the description for Problem %d:\n%s\n", num, descriptor(num));
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
 	sleep(0.5);
