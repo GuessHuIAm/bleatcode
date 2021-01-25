@@ -12,9 +12,7 @@
 static void sighandler(int signo) {
 	if (signo == SIGPIPE) {
 		printf("\nClient terminated. See you next time!\n");
-		remove("serverpipe");
-		remove("clientpipe");
-		exit(0);
+		handshake();
 	}
 	if (signo == SIGINT) {
 		printf("\nSorry to see you go!\n");
@@ -32,7 +30,7 @@ static void sighandler(int signo) {
 
 void handshake(){
 	//Server creates WKP and receives the client's PID
-	printf("Waiting for client connection...\n");
+	printf("\nWaiting for client connection...\n");
 	mkfifo("WKP", 0644);
 	int server = open("WKP", O_RDONLY);
 	char clientN[32];
