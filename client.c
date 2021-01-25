@@ -27,6 +27,11 @@ static void sighandler(int signo) {
 	}
 }
 
+char get_char(char c){
+	scanf(" %c", &c);
+	return c;
+}
+
 void remove_files(){
 	int f = fork();
 	if (!f){
@@ -136,9 +141,7 @@ int solve_prob(int client, int server, int num){
 			printf("Would you like to continue editing your code?\n");
 			printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
 			int c;
-			do{
-				c = getchar();
-			} while (c == '\n');
+			c = get_char;
 			if (c == 'n')
 				return -1; // go back
 			return num; // continue editing
@@ -159,9 +162,7 @@ int try(int client, int server, int num){
         printf("Do you want to try and solve Problem %d?\n", num);
 	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.) ");
 	sleep(1);
-	do{
-		c = getchar();
-	} while (c == '\n');
+	c = get_char();
 	if (c == 'n')
 		return -1; // go back
 	int s = num;
@@ -213,9 +214,7 @@ int main(){
 		else if (result == -10){
 			printf("Would you like to continue solving problems?\n");
 			printf("(Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
-			do{
-				c = getchar();
-			} while (c == '\n');
+			c = get_char();
 			if (c == 'n'){
 				printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
 				remove_files();
