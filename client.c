@@ -38,6 +38,34 @@ void remove_files(){
 		return;
 }
 
+void handshake(){
+	//Client makes FIFO and sends name to server
+	char clientN[32];
+	sprintf(clientN, "%d", getpid());
+	mkfifo(clientN, 0644);
+    	write(server, clientN, sizeof(clientN));
+	
+	int client = open(clientN, O_RDONLY);
+	int server = open("WKP", O_WRONLY);
+	handshake(server, client);
+	
+	printf("Loading...\n");
+
+	//Client receives server's response, remove the FIFO
+	printf("Loaded!\n");
+	char hello[256];
+	read(client, hello, sizeof(hello));
+	printf("%s\n", hello);
+	remove(clientN);
+	
+	//Client sends response to server
+	write(server, "Handshake now complete!\n", sizeof("Handshake now complete!\n"));
+	
+	close(server);
+	close(client);
+	return;
+}
+
 void find_name(int server, int client, char *name){
 	//Client's intro, send username to server
 	printf("\n---------------------\nWelcome to BleetCode!\n---------------------\n\n");
@@ -148,28 +176,10 @@ int try(int client, int server, int num){
 int main(){
 	signal(SIGINT, sighandler);
 	signal(SIGTSTP, sighandler);
+	handshake();
 	
-	//Client makes FIFO and sends name to server
-	char clientN[32];
-	sprintf(clientN, "%d", getpid());
-	mkfifo(clientN, 0644);
-    	write(server, clientN, sizeof(clientN));
-	
-	int client = open(clientN, O_RDONLY);
-	int server = open("WKP", O_WRONLY);
-	handshake(server, client);
-	
-	printf("Loading...\n");
-
-	//Client receives server's response, remove the FIFO
-	printf("Loaded!\n");
-	char hello[256];
-	read(client, hello, sizeof(hello));
-	printf("%s\n", hello);
-	remove(clientN);
-	
-	//Client sends response to server
-	write(server, "Handshake now complete!\n", sizeof("Handshake now complete!\n"));
+	int server = open("serverpipe", O_WRONLY);
+	int client = open("clientpipe", O_RDONLY);
 	
 	char name[32];
 	find_name(server, client, name);
