@@ -34,6 +34,10 @@ void remove_files(){
 		return;
 }
 
+int test(int client, int server, char *file_name, int num){
+	return 100;
+}
+
 int solve_prob(int client, int server, int num){
 	int status;
 	int f = fork();
@@ -48,16 +52,25 @@ int solve_prob(int client, int server, int num){
 	}
 	else{
 		int pid = wait(&status);
+		char file_name[100];
 		printf("\nWelcome back! Let's test your code.\n");
+		sprintf(file_name, "file%d.c", num);
+		int test_result;
+		int test_result = test(server, client, file_name, num);
 		// send to server and back and forth, if the solutions all match, break so this func returns 100
-		printf("Would you like to continue editing your code?\n");
-		printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
-		int c;
-		c = getchar(); // getting whatever scanf left behind
-		c = getchar();
-		if (c == 'n')
-			return -1; // go back
-		return num; // continue editing
+		if (test_result < 0){
+			printf("Would you like to continue editing your code?\n");
+			printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
+			int c;
+			c = getchar(); // getting whatever scanf left behind
+			c = getchar();
+			if (c == 'n')
+				return -1; // go back
+			return num; // continue editing
+		}
+		else{
+			return 100;
+		}
 	}
 	return 100;
 }
