@@ -5,6 +5,6 @@ void print_all();
 void print_descriptor(int id);
 void print_subject(int id);
 char * subject(int id);
-char * descriptor(int id){
+char * descriptor(int id);
 
 #endif
