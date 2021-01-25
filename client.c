@@ -64,16 +64,18 @@ void handshake(){
 	close(server);
 }
 
-char *find_name(){
+char *find_name(int server, int client){
 	//Client's intro, send username to server
-	char name[32];
-	int c;
 	printf("\n---------------------\nWelcome to BleetCode!\n---------------------\n\n");
 	sleep(0.5);
-	printf("Before we begin...\n");
+	printf("Two more things before we begin!\n");
 	sleep(1);
+	
+	char name[32];
+	int c;
+	int s = 1; // selector int for communication
 	while(1){
-		printf("\nWhat is your name? ");
+		printf("What is your name? ");
 		scanf(" %32[^\n]", name);
 		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
 		c = getchar(); // getting whatever scanf left behind
@@ -81,16 +83,21 @@ char *find_name(){
 		if (c != 'n')
 			break;
 	}
+	write(server, s, sizeof(s)); Let server know that this is a name request
 	write(server, name, sizeof(name));
 
-	//client reads from server
+	//client sends name to server
     	char message[32];
 	read(client, message, sizeof(message));
-    	printf("\nHello %s! The handshaking is complete. Let's get started!\n\n", message);
+    	printf("\nHello %s!\n", message);
 	
 	sleep(1);
-	
 	return name;
+}
+
+struct *problemset find_set(int server, int client){
+	struct problemset *ps = new_set(server, client);
+	return ps;
 }
 
 int test(int client, int server, char *file_name, int num){
@@ -169,12 +176,14 @@ int main(){
 	signal(SIGINT, sighandler);
 	signal(SIGTSTP, sighandler);
 	handshake();
-	char *name = find_name();
-	//struct problemset *ps = find_set();
-	struct problemset *ps = new_set();
+	
+	int server = open("serverpipe", O_WRONLY);
+	int client = open("clientpipe", O_RDONLY);
+	
+	char *name = find_name(server, client);
+	struct problemset *ps = find_set(server, client);
 
 	int problem_number;
-
     	while(1){
 		print_set(name, ps);
         	printf("\nWhich problem do you want to attempt? Please enter a number: ");
