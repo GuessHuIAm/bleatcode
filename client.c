@@ -155,7 +155,7 @@ int main(){
 
     	while(1){
 		print_set(name, ps);
-        	printf("Which problem do you want to attempt? Please enter a number: ");
+        	printf("\nWhich problem do you want to attempt? Please enter a number: ");
         	scanf(" %d", &problem_number);
 		write(server, &problem_number, sizeof(problem_number));
 
