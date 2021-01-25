@@ -114,7 +114,14 @@ void find_name(int server, int client, char *name){
 
 struct problemset *find_set(int server, int client){
 	struct problemset *ps = new_set(server, client);
-	return ps;
+	printf("\nIs this your first time on Bleet? (Press 'n' if no. Press any other key to receive an ID.)\n");
+	int c = get_char();
+	if (c == 'n'){
+		return ps;
+	}
+	else{
+		return ps;
+	}
 }
 
 int test(int client, int server, char *file_name, int num){
