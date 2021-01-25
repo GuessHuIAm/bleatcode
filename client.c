@@ -49,7 +49,7 @@ int try(int client, int server, int num){
 	char output[1024];
 	int c;
 	read(client, &output, sizeof(output));
-	printf("Here is the description for Problem %d:\n%s\n", num, output);
+	printf("\nHere is the description for Problem %d:\n%s\n", num, output);
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
 	sleep(0.5);
@@ -60,11 +60,19 @@ int try(int client, int server, int num){
 		return -1; // go back
 	int s = num;
 	while (s >= 0 && s < 20){
+		sleep(2);
 		printf("Solving... \n");
+		sleep(1);
 		s = solve_prob(client, server, num);
 	}
-	if (s == 100) // success
+	if (s == 100){ // success
+		sleep(1);
+		printf("Yay! You did it--Problem %d marked complete.", num);
+		sleep(1);
+		printf("Let's go back to your problem set.");
+		sleep(1);
 		return num;
+	}
 	if (s < 0) // giving up
 		return -1;
 }
@@ -116,7 +124,7 @@ int main(){
 
     	while(1){
 		print_set(name, ps);
-        	printf("Which problem do you want to attempt? Please enter a number: \n");
+        	printf("Which problem do you want to attempt? Please enter a number: ");
         	scanf(" %d", &problem_number);
 		write(server, &problem_number, sizeof(problem_number));
 
@@ -126,8 +134,14 @@ int main(){
 		if (result >= 0){
 			solve(ps, result);
 		}
+		
+		printf("Would you like to continue solving problems? (Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
+		c = getchar(); // getting whatever scanf left behind
+		c = getchar();
+		if (c == 'n')
+			break;
 	}
-	
+	printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
 	remove_files();
 	return 0;
 }
