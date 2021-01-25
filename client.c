@@ -141,17 +141,19 @@ int main(){
 		result = try(client, server, problem_number);
 
 		if (result >= 0){
-			solve(ps, result);
+			solve(ps, result); // updating problem set with completion status
 		}
 		else if (result == -10){
-		printf("Would you like to continue solving problems? (Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
-		c = getchar(); // getting whatever scanf left behind
-		c = getchar();
-		if (c == 'n')
-			break;
+			printf("Would you like to continue solving problems?\n");
+			printf("(Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
+			c = getchar(); // getting whatever scanf left behind
+			c = getchar();
+			if (c == 'n'){
+				printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
+				remove_files();
+				return 0;
+			}
 		}
 	}
-	printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
-	remove_files();
 	return 0;
 }
