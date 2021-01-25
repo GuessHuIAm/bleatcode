@@ -5,11 +5,18 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <time.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include "problem.h"
 #include "problemset.h"
 #include "csv.h"
+
+static void sighandler(int signo) {
+    if (signo == SIGINT) {
+        exit(0);
+    }
+}
 
 void remove_files(){
 	int f = fork();
@@ -126,7 +133,9 @@ int main(){
 	//client removes pipe
 	remove(clientN);
 	sleep(1);
-
+	
+	signal(SIGINT, sighandler);
+	
 	struct problemset *ps = new_set();
 
 	int problem_number;
