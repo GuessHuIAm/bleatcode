@@ -31,7 +31,7 @@ int get_char(){
 	int c;
 	do {
 		c = getchar();
-	} while(c != "\n");
+	} while(c != '\n');
 	int o;
 	while ((o = getchar()) != '\n' && o != EOF) { } // remove other stuff
 	return c;
