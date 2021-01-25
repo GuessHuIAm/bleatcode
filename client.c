@@ -74,7 +74,7 @@ int try(int client, int server, int num){
 		return num;
 	}
 	if (s < 0) // giving up
-		return -1;
+		return -10;
 }
 
 int main(){
@@ -134,12 +134,13 @@ int main(){
 		if (result >= 0){
 			solve(ps, result);
 		}
-		
+		else if (result == -10){
 		printf("Would you like to continue solving problems? (Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
 		c = getchar(); // getting whatever scanf left behind
 		c = getchar();
 		if (c == 'n')
 			break;
+		}
 	}
 	printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
 	remove_files();
