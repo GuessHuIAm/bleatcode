@@ -11,8 +11,8 @@
 
 static void sighandler(int signo) {
 	if (signo == SIGPIPE) {
-		printf("\Client terminated. See you next time!\n");
-		handshake();
+		printf("\nClient terminated. See you next time!\n");
+		exit(0);
 	}
 	if (signo == SIGINT) {
 		printf("\nSorry to see you go!\n");
@@ -46,7 +46,7 @@ int main() {
                 printf("Acknowledgement sent.\n");
 		
 		signal(SIGINT, sighandler);
-		signal(SIGPIP, sighandler);
+		signal(SIGPIPE, sighandler);
 
 		int input = 0;
 		int answer = 0;
