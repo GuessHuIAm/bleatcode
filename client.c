@@ -39,10 +39,10 @@ int try(int client, int server, int num){
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
 	sleep(0.5);
-	printf("(Press 'n' to go back to your problems. Press any other key to continue solving.)\n");
+	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.)\n");
 	c = getchar(); // getting whatever scanf left behind
 	c = getchar();
-	if (c != 'n')
+	if (c == 'n')
 		return -1; // go back
 	int s = num;
 	while (s >= 0 && s < 20){
