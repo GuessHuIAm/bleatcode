@@ -14,7 +14,7 @@
 
 static void sighandler(int signo) {
     if (signo == SIGINT) {
-	printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
+	printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
         exit(0);
     }
 }
