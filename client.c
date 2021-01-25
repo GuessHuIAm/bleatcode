@@ -13,10 +13,14 @@
 #include "csv.h"
 
 static void sighandler(int signo) {
-    if (signo == SIGINT) {
-	printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
-        exit(0);
-    }
+	if (signo == SIGINT) {
+		printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
+		exit(0);
+	}
+	if (signo == SIGTSTP) {
+		printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
+		exit(0);
+	}
 }
 
 void remove_files(){
@@ -148,6 +152,7 @@ int main(){
 	sleep(1);
 	
 	signal(SIGINT, sighandler);
+	signal(SIGTSTP, sighandler);
 	
 	struct problemset *ps = new_set();
 
