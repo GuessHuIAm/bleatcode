@@ -43,10 +43,11 @@ void handshake(){
 	char clientN[32];
 	sprintf(clientN, "%d", getpid());
 	mkfifo(clientN, 0644);
+	
+	int server = open("WKP", O_WRONLY);
     	write(server, clientN, sizeof(clientN));
 	
 	int client = open(clientN, O_RDONLY);
-	int server = open("WKP", O_WRONLY);
 	handshake(server, client);
 	
 	printf("Loading...\n");
