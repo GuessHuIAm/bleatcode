@@ -36,7 +36,7 @@ void handshake(){
 	mkfifo("WKP", 0644);
 	int server = open("WKP", O_RDONLY);
 	char clientN[32];
-	read(server, clientN, sizeof(clientN);
+	read(server, clientN, sizeof(clientN));
 	printf("Client pipe %s was connected.\n", clientN);
 	remove("WKP");
 	
