@@ -12,22 +12,23 @@
 #include "csv.h"
 
 int solve(int num){
-	int status;
-	int f = fork();
-	if (!f){
-		int pid = getpid();
-		char *cmd = "nano";
-		char *argv[3];
-		argv[0] = "nano";
-		argv[1] = "file.c";
-		argv[2] = NULL;
-		return execvp(cmd, argv);
-	}
-	else{
-		int pid = wait(&status);
-		printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
-		printf("\nParent: This parent process is finished. Bye!\n");
-	}
+	//int status;
+	//int f = fork();
+	//if (!f){
+	//	int pid = getpid();
+	//	char *cmd = "nano";
+	//	char *argv[3];
+	//	argv[0] = "nano";
+	//	argv[1] = "file.c";
+	//	argv[2] = NULL;
+	//	return execvp(cmd, argv);
+	//}
+	//else{
+	//	int pid = wait(&status);
+	//	printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
+	//	printf("\nParent: This parent process is finished. Bye!\n");
+	//}
+	return 100;
 }
 
 int try(int num){
