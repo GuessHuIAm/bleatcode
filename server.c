@@ -4,6 +4,16 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <signal.h>
+#include "problem.h"
+#include "problemset.h"
+#include "csv.h"
+
+static void sighandler(int signo) {
+    if (signo == SIGINT) {
+        exit(0);
+    }
+}
 
 int main() {
 	while(1){
