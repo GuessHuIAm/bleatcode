@@ -27,8 +27,13 @@ static void sighandler(int signo) {
 	}
 }
 
-char get_char(char c){
-	scanf(" %c", &c);
+int get_char(){
+	int c;
+	do {
+		c = getchar();
+	} while(c != "\n");
+	int o;
+	while ((o = getchar()) != '\n' && o != EOF) { } // remove other stuff
 	return c;
 }
 
@@ -82,7 +87,7 @@ void find_name(int server, int client, char *name){
 	printf("Two more things before we begin!\n");
 	sleep(1);
 
-	char c;
+	int c;
 	int s = 1; // selector int for communication
 	while(1){
 		printf("What is your name? ");
@@ -140,7 +145,7 @@ int solve_prob(int client, int server, int num){
 		if (test_result < 0){
 			printf("Would you like to continue editing your code?\n");
 			printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
-			char c;
+			int c;
 			c = get_char(c);
 			if (c == 'n')
 				return -1; // go back
@@ -154,7 +159,7 @@ int solve_prob(int client, int server, int num){
 }
 
 int try(int client, int server, int num){
-	char c;
+	int c;
 	//read(client, &output, sizeof(output));
 	printf("\nHere is the description for Problem %d:\n%s\n", num, descriptor(num));
 	sleep(1);
@@ -195,7 +200,7 @@ int main(){
 	struct problemset *ps = find_set(server, client);
 
 	int problem_number;
-	char c;
+	int c;
 	int s; // communicator to server
     	while(1){
 		print_set(name, ps);
