@@ -60,6 +60,7 @@ int try(int client, int server, int num){
 		return -1; // go back
 	int s = num;
 	while (s >= 0 && s < 20){
+		printf("Solving... \n");
 		s = solve_prob(client, server, num);
 	}
 	if (s == 100) // success
