@@ -11,6 +11,7 @@
 
 static void sighandler(int signo) {
     if (signo == SIGINT) {
+	printf("Client terminated. Sorry to see you go!\n");
         exit(0);
     }
 }
