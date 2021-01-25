@@ -18,6 +18,10 @@ static void sighandler(int signo) {
 		printf("\nSorry to see you go!\n");
 		exit(0);
 	}
+	if (signo == SIGTSTP) {
+		printf("\nSorry to see you go!\n");
+		exit(0);
+	}
 }
 
 int main() {
