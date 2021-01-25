@@ -19,7 +19,8 @@ void remove_files(){
 		argv[0] = "rm";
 		argv[1] = "file*";
 		argv[2] = NULL;
-		return execvp(cmd, argv);
+		execvp(cmd, argv);
+		return;
 	}
 	else
 		return;
