@@ -50,8 +50,9 @@ void handshake(){
 	//Server receives client's message
 	char handshake[256];
     	read(server, handshake, sizeof(handshake));
-    	close(server);
     	printf("From the client: %s\n", handshake);
+	close(client);
+    	close(server);
 	     
 	return;
 }
