@@ -86,7 +86,7 @@ char *find_name(int server, int client){
 	write(server, &s, sizeof(s)); //Let server know that this is a name request
 	write(server, name, sizeof(name));
 
-	//client sends name to server
+	//server returns your name
     	char message[32];
 	read(client, message, sizeof(message));
     	printf("\nHello %s!\n", message);
@@ -184,13 +184,13 @@ int main(){
 	struct problemset *ps = find_set(server, client);
 
 	int problem_number;
-	int s = 3; // communicator to server
+	int s; // communicator to server
     	while(1){
 		print_set(name, ps);
         	printf("\nWhich problem do you want to attempt? Please enter a number: ");
         	scanf(" %d", &problem_number);
-		write(server, &s, sizeof(s));
-		write(server, &problem_number, sizeof(problem_number));
+		//write(server, &s, sizeof(s)); // request for problem description
+		//write(server, &problem_number, sizeof(problem_number));
 
 		int result;
 		result = try(client, server, problem_number);
