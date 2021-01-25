@@ -41,6 +41,15 @@ int solve_prob(int client, int server, int num){
 	else{
 		int pid = wait(&status);
 		printf("\nWelcome back! Let's test your code.\n");
+		// send to server and back and forth, if the solutions all match, break so this func returns 100
+		printf("Would you like to continue editing your code?\n");
+		printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
+		int c;
+		c = getchar(); // getting whatever scanf left behind
+		c = getchar();
+		if (c == 'n')
+			return -1; // go back
+		return num; // continue editing
 	}
 	return 100;
 }
@@ -67,9 +76,9 @@ int try(int client, int server, int num){
 	}
 	if (s == 100){ // success
 		sleep(1);
-		printf("Yay! You did it--Problem %d marked complete.", num);
+		printf("Yay! You did it--Problem %d marked complete.\n", num);
 		sleep(1);
-		printf("Let's go back to your problem set.");
+		printf("Let's go back to your problem set.\n");
 		sleep(1);
 		return num;
 	}
