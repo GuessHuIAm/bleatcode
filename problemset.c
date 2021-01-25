@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "csv.h"
 #include "problem.h"
 #include "problemset.h"
@@ -26,6 +27,7 @@ void print_set(char *name, struct problemset *ps){
         	struct problem *p = ps->problems[i];
         	print_problem(p);
 	}
+	sleep(1);
 	return;
 };
 
