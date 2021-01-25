@@ -71,20 +71,20 @@ char *find_name(int server, int client){
 	printf("Two more things before we begin!\n");
 	sleep(1);
 	
-	char name[32];
+	char newname[32];
 	int c;
 	int s = 1; // selector int for communication
 	while(1){
 		printf("What is your name? ");
-		scanf(" %32[^\n]", name);
-		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
+		scanf(" %32[^\n]", newname);
+		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", newname);
 		c = getchar(); // getting whatever scanf left behind
 		c = getchar();
 		if (c != 'n')
 			break;
 	}
 	write(server, &s, sizeof(s)); //Let server know that this is a name request
-	write(server, name, sizeof(name));
+	write(server, newname, sizeof(newname));
 
 	//server returns your name
     	char message[32];
@@ -92,10 +92,10 @@ char *find_name(int server, int client){
     	printf("\nHello %s!\n", message);
 	
 	sleep(1);
-	return name;
+	return newname;
 }
 
-struct *problemset find_set(int server, int client){
+struct problemset *find_set(int server, int client){
 	struct problemset *ps = new_set(server, client);
 	return ps;
 }
@@ -184,6 +184,7 @@ int main(){
 	struct problemset *ps = find_set(server, client);
 
 	int problem_number;
+	int c;
 	int s; // communicator to server
     	while(1){
 		print_set(name, ps);
