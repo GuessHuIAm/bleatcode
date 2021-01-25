@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "problem.h"
+#include "csv.h"
 
 struct problem *new_problem(int num){
 	struct problem *np;
