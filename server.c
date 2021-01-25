@@ -65,21 +65,24 @@ int main() {
 
 	int server = open("serverpipe", O_RDONLY);
 	int client = open("client", O_WRONLY);
-
+	
+	int s;
+	char name[32];
 	while(1){
-		read(server, &input, sizeof(input));
-		printf("%d", input);
-		answer = input * input;
-		write(client, &answer, sizeof(answer));
-		//server reads from client
-		char name[32];
-		read(server, name, sizeof(name));
-		printf("Received client's name: %s.\n", name);
-
-		write(client, name, sizeof(name));
-		printf("Acknowledgement sent.\n");	
-
-		int input = 0;
-		int answer = 0;
+		read(server, &s, sizeof(s)); // reads communicator integer
+		if (s == 1){ // name request
+			read(server, name, sizeof(name));
+			printf("Received client's name: %s.\n", name);
+			write(client, name, sizeof(name));
+			printf("Acknowledgement sent.\n");
+		}
+		else if (s == 2){
+		}
+		else if (s == 3){
+		}
+		else if (s == 4){
+		}
+		else if (s == 5){
+		}
 	}
 }
