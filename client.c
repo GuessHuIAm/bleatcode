@@ -48,7 +48,6 @@ void handshake(){
     	write(server, clientN, sizeof(clientN));
 	
 	int client = open(clientN, O_RDONLY);
-	handshake(server, client);
 	
 	printf("Loading...\n");
 
