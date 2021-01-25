@@ -58,10 +58,10 @@ void handshake(){
 int main() {
 	mkfifo("serverpipe", 0644);
 	mkfifo("clientpipe", 0644);
+	handshake();
 	signal(SIGINT, sighandler);
 	signal(SIGPIPE, sighandler);
 	signal(SIGTSTP, sighandler);
-	handshake();
 
 	int server = open("serverpipe", O_RDONLY);
 	int client = open("clientpipe", O_WRONLY);
