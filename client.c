@@ -11,23 +11,36 @@
 #include "problemset.h"
 #include "csv.h"
 
+void remove_files(){
+	int f = fork();
+	if (!f){
+		char *cmd = "rm";
+		char *argv[3];
+		argv[0] = "rm";
+		argv[1] = "file*";
+		argv[2] = NULL;
+		return execvp(cmd, argv);
+	}
+	else
+		return;
+}
+
 int solve_prob(int client, int server, int num){
-	//int status;
-	//int f = fork();
-	//if (!f){
-	//	int pid = getpid();
-	//	char *cmd = "nano";
-	//	char *argv[3];
-	//	argv[0] = "nano";
-	//	argv[1] = "file.c";
-	//	argv[2] = NULL;
-	//	return execvp(cmd, argv);
-	//}
-	//else{
-	//	int pid = wait(&status);
-	//	printf("\nParent: The child with pid %d has finished! It slepted for %d seconds.\n", pid, WEXITSTATUS(status));
-	//	printf("\nParent: This parent process is finished. Bye!\n");
-	//}
+	int status;
+	int f = fork();
+	if (!f){
+		int pid = getpid();
+		char *cmd = "nano";
+		char *argv[3];
+		argv[0] = "nano";
+		sprintf(argv[1], "file%d.c", num);
+		argv[2] = NULL;
+		return execvp(cmd, argv);
+	}
+	else{
+		int pid = wait(&status);
+		printf("\nWelcome back! Let's test your code.\n");
+	}
 	return 100;
 }
 
@@ -112,6 +125,7 @@ int main(){
 			solve(ps, result);
 		}
 	}
-
+	
+	remove_files();
 	return 0;
 }
