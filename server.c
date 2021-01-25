@@ -43,7 +43,7 @@ void handshake(){
 	//Server writes back to client
 	int client = open(clientN, O_WRONLY);
 	printf("Connected to client.\n");
-    	char message[] = "";
+    	char message[] = "The handshake is complete. Let's get started!\n";
     	write(server, message, sizeof(message));
     	printf("Sent welcome message to client.\n", name);
 	     
