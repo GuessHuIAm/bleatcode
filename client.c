@@ -38,6 +38,60 @@ void remove_files(){
 		return;
 }
 
+void handshake(){
+	//Client's FIFO name
+	char clientN[256];
+	sprintf(clientN, "%d", getpid());
+
+	//Client sends FIFO name to server	
+	int server = open("WKP", O_WRONLY);
+    	write(server, clientN, sizeof(clientN));
+	printf("Loading...\n");
+
+	//Client receives server's response, remove the FIFO
+	mkfifo(clientN, 0644);
+	int client = open(clientN, O_RDONLY);
+	printf("Loaded!\n");
+	char hello[256];
+	read(client, hello, sizeof(hello));
+	remove(clientN);
+	
+	//Client sends response to server
+	write(server, "Handshake now complete!\n", sizeof ("Handshake now complete!\n"));
+
+	close(client);
+	close(server);
+}
+
+char *find_name(){
+	//Client's intro, send username to server
+	char name[32];
+	int c;
+	printf("\n---------------------\nWelcome to BleetCode!\n---------------------\n\n");
+	sleep(0.5);
+	printf("Before we begin...\n");
+	sleep(1);
+	while(1){
+		printf("\nWhat is your name? ");
+		scanf(" %32[^\n]", name);
+		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
+		c = getchar(); // getting whatever scanf left behind
+		c = getchar();
+		if (c != 'n')
+			break;
+	}
+	write(server, name, sizeof(name));
+
+	//client reads from server
+    	char message[32];
+	read(client, message, sizeof(message));
+    	printf("\nHello %s! The handshaking is complete. Let's get started!\n\n", message);
+	
+	sleep(1);
+	
+	return name;
+}
+
 int test(int client, int server, char *file_name, int num){
 	return 100;
 }
@@ -111,49 +165,11 @@ int try(int client, int server, int num){
 }
 
 int main(){
-	//client to server handshake
-	char clientN[32];
-	sprintf(clientN, "%d", getpid());
-	mkfifo(clientN, 0644);
-
-	//client to server
-    	int server = open("WKP", O_WRONLY);
-    	write(server, clientN, sizeof(clientN));
-	printf("Loading...\n");
-
-	int client = open(clientN, O_RDONLY);
-	printf("Loaded!\n");
-
-	//client's intro / send user name to server
-	char name[32];
-	int c;
-	printf("\n---------------------\nWelcome to BleetCode!\n---------------------\n\n");
-	sleep(0.5);
-	printf("Before we begin...\n");
-	sleep(1);
-	while(1){
-		printf("\nWhat is your name? ");
-		scanf(" %32[^\n]", name);
-		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
-		c = getchar(); // getting whatever scanf left behind
-		c = getchar();
-		if (c != 'n')
-			break;
-	}
-	write(server, name, sizeof(name));
-
-	//client reads from server
-    	char message[32];
-	read(client, message, sizeof(message));
-    	printf("\nHello %s! The handshaking is complete. Let's get started!\n\n", message);
-
-	//client removes pipe
-	remove(clientN);
-	sleep(1);
-	
 	signal(SIGINT, sighandler);
 	signal(SIGTSTP, sighandler);
-	
+	handshake();
+	char *name = find_name();
+	//struct problemset *ps = find_set();
 	struct problemset *ps = new_set();
 
 	int problem_number;
