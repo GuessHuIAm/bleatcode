@@ -82,7 +82,7 @@ void find_name(int server, int client, char *name){
 	printf("Two more things before we begin!\n");
 	sleep(1);
 
-	int c;
+	char c;
 	int s = 1; // selector int for communication
 	while(1){
 		printf("What is your name? ");
@@ -90,7 +90,7 @@ void find_name(int server, int client, char *name){
 		sleep(0.5);
 		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
 		do{
-			c = getchar();
+			c = get_char(c);
 		} while (c == '\n');
 		if (c != 'n')
 			break;
@@ -140,8 +140,8 @@ int solve_prob(int client, int server, int num){
 		if (test_result < 0){
 			printf("Would you like to continue editing your code?\n");
 			printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
-			int c;
-			c = get_char;
+			char c;
+			c = get_char(c);
 			if (c == 'n')
 				return -1; // go back
 			return num; // continue editing
@@ -154,15 +154,14 @@ int solve_prob(int client, int server, int num){
 }
 
 int try(int client, int server, int num){
-	//char output[1024];
-	int c;
+	char c;
 	//read(client, &output, sizeof(output));
 	printf("\nHere is the description for Problem %d:\n%s\n", num, descriptor(num));
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
 	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.) ");
 	sleep(1);
-	c = get_char();
+	c = get_char(c);
 	if (c == 'n')
 		return -1; // go back
 	int s = num;
@@ -196,7 +195,7 @@ int main(){
 	struct problemset *ps = find_set(server, client);
 
 	int problem_number;
-	int c;
+	char c;
 	int s; // communicator to server
     	while(1){
 		print_set(name, ps);
@@ -214,7 +213,7 @@ int main(){
 		else if (result == -10){
 			printf("Would you like to continue solving problems?\n");
 			printf("(Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
-			c = get_char();
+			c = get_char(c);
 			if (c == 'n'){
 				printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
 				remove_files();
