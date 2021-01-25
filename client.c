@@ -55,7 +55,6 @@ int solve_prob(int client, int server, int num){
 		char file_name[100];
 		printf("\nWelcome back! Let's test your code.\n");
 		sprintf(file_name, "file%d.c", num);
-		int test_result;
 		int test_result = test(server, client, file_name, num);
 		// send to server and back and forth, if the solutions all match, break so this func returns 100
 		if (test_result < 0){
