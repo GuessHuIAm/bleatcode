@@ -70,19 +70,20 @@ int main() {
 	char name[32];
 	while(1){
 		read(server, &s, sizeof(s)); // reads communicator integer
-		if (s == 1){ // name request
+		if (s == 1){ // request to give name
 			read(server, name, sizeof(name));
 			printf("Received client's name: %s.\n", name);
 			write(client, name, sizeof(name));
 			printf("Acknowledgement sent.\n");
 		}
-		else if (s == 2){
-		}
-		else if (s == 3){
-		}
-		else if (s == 4){
-		}
-		else if (s == 5){
-		}
+		//else if (s == 2){ // request for problem set search
+		//}
+		//else if (s == 3){ // request for solution check
+		//}
+		//else if (s == 4){ // request to solve the 
+		//}
+		//else if (s == 5){ 
+		//}
 	}
+	return 0;
 }
