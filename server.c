@@ -12,54 +12,74 @@
 static void sighandler(int signo) {
 	if (signo == SIGPIPE) {
 		printf("\nClient terminated. See you next time!\n");
+		remove("serverpipe");
+		remove("clientpipe");
 		exit(0);
 	}
 	if (signo == SIGINT) {
 		printf("\nSorry to see you go!\n");
+		remove("serverpipe");
+		remove("clientpipe");
 		exit(0);
 	}
 	if (signo == SIGTSTP) {
 		printf("\nSorry to see you go!\n");
+		remove("serverpipe");
+		remove("clientpipe");
 		exit(0);
 	}
 }
 
+void handshake(){
+	//Server creates WKP and receives the client's PID
+	printf("Waiting for client connection...\n");
+	mkfifo("WKP", 0644);
+	int server = open("WKP", O_RDONLY);
+	char clientN[32];
+	read(server, clientN, sizeof(clientN);
+	printf("Client pipe %s was connected.\n", clientN);
+	remove("WKP");
+	
+	//Server writes back to client
+	int client = open(clientN, O_WRONLY);
+	printf("Connected to client.\n");
+    	char message[] = "";
+    	write(server, message, sizeof(message));
+    	printf("Sent welcome message to client.\n", name);
+	     
+	//Server receives client's message
+	char handshake[256];
+    	read(server, handshake, sizeof(handshake));
+    	close(server);
+    	printf("From the client: %s\n", handshake);
+	     
+	return;
+}
+
 int main() {
+	mkfifo("serverpipe", 0644);
+	mkfifo("clientpipe", 0644);
+	signal(SIGINT, sighandler);
+	signal(SIGPIPE, sighandler);
+	handshake();
+
+	int server = open("serverpipe", O_RDONLY);
+	int client = open("client", O_WRONLY);
+
 	while(1){
-		printf("WKP created.\n");
-		mkfifo("WKP", 0644);
-
-		printf("Waiting for connection from client...\n");
-		int server = open("WKP", O_RDONLY);
-
-		char clientN[32];
-    		read(server, clientN, sizeof(clientN));
-		printf("Client pipe %s was connected.\n", clientN);
-    		remove("WKP");
-		printf("WKP removed\n");
-
-    		int client = open(clientN, O_WRONLY);
-		printf("Connected to client\n");
-
+		read(server, &input, sizeof(input));
+		printf("%d", input);
+		answer = input * input;
+		write(client, &answer, sizeof(answer));
 		//server reads from client
-    		char name[32];
-    		read(server, name, sizeof(name));
-    		printf("Received client's name: %s.\n", name);
+		char name[32];
+		read(server, name, sizeof(name));
+		printf("Received client's name: %s.\n", name);
 
 		write(client, name, sizeof(name));
-                printf("Acknowledgement sent.\n");
-		
-		signal(SIGINT, sighandler);
-		signal(SIGPIPE, sighandler);
+		printf("Acknowledgement sent.\n");	
 
 		int input = 0;
 		int answer = 0;
-
-		while(1){
-			read(server, &input, sizeof(input));
-			printf("%d", input);
-			answer = input * input;
-			write(client, &answer, sizeof(answer));
-		}
-    	}
+	}
 }
