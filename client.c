@@ -40,7 +40,7 @@ void remove_files(){
 
 void handshake(){
 	//Client's FIFO name
-	char clientN[256];
+	char clientN[32];
 	sprintf(clientN, "%d", getpid());
 
 	//Client sends FIFO name to server	
@@ -57,7 +57,7 @@ void handshake(){
 	remove(clientN);
 	
 	//Client sends response to server
-	write(server, "Handshake now complete!\n", sizeof ("Handshake now complete!\n"));
+	write(server, "Handshake now complete!\n", sizeof("Handshake now complete!\n"));
 
 	close(client);
 	close(server);
