@@ -61,6 +61,7 @@ int main() {
 	mkfifo("clientpipe", 0644);
 	signal(SIGINT, sighandler);
 	signal(SIGPIPE, sighandler);
+	signal(SIGTSTP, sighandler);
 	handshake();
 
 	int server = open("serverpipe", O_RDONLY);
