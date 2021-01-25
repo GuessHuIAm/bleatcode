@@ -125,7 +125,7 @@ char * subject(int id){
 		row++;
         }
         fclose(fp);
-        return buffer;
+        return "Can't find it";
 }
 
 char * descriptor(int id){
@@ -155,5 +155,5 @@ char * descriptor(int id){
 		row++;
         }
         fclose(fp);
-        return buffer;
+        return "Can't find it\n";
 }
