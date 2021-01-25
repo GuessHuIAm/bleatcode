@@ -9,25 +9,6 @@
 #include "problemset.h"
 #include "csv.h"
 
-static void sighandler(int signo) {
-	if (signo == SIGPIPE) {
-		printf("\nClient terminated. See you next time!\n");
-		handshake();
-	}
-	if (signo == SIGINT) {
-		printf("\nSorry to see you go!\n");
-		remove("serverpipe");
-		remove("clientpipe");
-		exit(0);
-	}
-	if (signo == SIGTSTP) {
-		printf("\nSorry to see you go!\n");
-		remove("serverpipe");
-		remove("clientpipe");
-		exit(0);
-	}
-}
-
 void handshake(){
 	//Server creates WKP and receives the client's PID
 	printf("\nWaiting for client connection...\n");
@@ -55,13 +36,32 @@ void handshake(){
 	return;
 }
 
+static void sighandler(int signo) {
+	if (signo == SIGPIPE) {
+		printf("\nClient terminated. See you next time!\n");
+		handshake();
+	}
+	if (signo == SIGINT) {
+		printf("\nSorry to see you go!\n");
+		remove("serverpipe");
+		remove("clientpipe");
+		exit(0);
+	}
+	if (signo == SIGTSTP) {
+		printf("\nSorry to see you go!\n");
+		remove("serverpipe");
+		remove("clientpipe");
+		exit(0);
+	}
+}
+
 int main() {
 	mkfifo("serverpipe", 0644);
 	mkfifo("clientpipe", 0644);
-	handshake();
 	signal(SIGINT, sighandler);
 	signal(SIGPIPE, sighandler);
 	signal(SIGTSTP, sighandler);
+	handshake();
 
 	int server = open("serverpipe", O_RDONLY);
 	int client = open("clientpipe", O_WRONLY);
