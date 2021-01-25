@@ -10,10 +10,14 @@
 #include "csv.h"
 
 static void sighandler(int signo) {
-    if (signo == SIGINT) {
-	printf("Client terminated. Sorry to see you go!\n");
-        exit(0);
-    }
+	if (signo == SIGPIPE) {
+		printf("\Client terminated. See you next time!\n");
+		handshake();
+	}
+	if (signo == SIGINT) {
+		printf("\nSorry to see you go!\n");
+		exit(0);
+	}
 }
 
 int main() {
@@ -42,6 +46,7 @@ int main() {
                 printf("Acknowledgement sent.\n");
 		
 		signal(SIGINT, sighandler);
+		signal(SIGPIP, sighandler);
 
 		int input = 0;
 		int answer = 0;
