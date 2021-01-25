@@ -21,6 +21,9 @@ static void sighandler(int signo) {
 		printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
 		exit(0);
 	}
+	if (signo == SIGPIPE) {
+		printf("\nServer terminated. Sorry to see you go! Remember your ID so you can continue solving next time!\n");
+		exit(0);
 }
 
 void remove_files(){
@@ -78,6 +81,7 @@ void find_name(int server, int client, char *name){
 	while(1){
 		printf("What is your name? ");
 		scanf(" %32[^\n]", name);
+		sleep(0.5);
 		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
 		c = getchar(); // getting whatever scanf left behind
 		c = getchar();
