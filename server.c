@@ -39,6 +39,8 @@ int main() {
 
 		write(client, name, sizeof(name));
                 printf("Acknowledgement sent.\n");
+		
+		signal(SIGINT, sighandler);
 
 		int input = 0;
 		int answer = 0;
