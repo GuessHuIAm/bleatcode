@@ -115,16 +115,16 @@ int solve_prob(int client, int server, int num){
 	if (!f){
 		printf("Solving... \n");
 		sleep(1);
-		int pid = getpid();
 		char *cmd = "nano";
 		char *argv[3];
 		argv[0] = "nano";
 		sprintf(argv[1], "file%d.c", num);
 		argv[2] = NULL;
+		printf("%s%s%s", argv[0], argv[1], argv[2]);
 		return execvp(cmd, argv);
 	}
 	else{
-		int pid = wait(&status);
+		wait(&status);
 		char file_name[100];
 		printf("\nWelcome back! Let's test your code.\n");
 		sprintf(file_name, "file%d.c", num);
@@ -154,8 +154,8 @@ int try(int client, int server, int num){
 	printf("\nHere is the description for Problem %d:\n%s\n", num, descriptor(num));
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
-	sleep(0.5);
-	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.)\n");
+	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.) ");
+	sleep(1);
 	c = getchar(); // getting whatever scanf left behind
 	c = getchar();
 	if (c == 'n')
@@ -180,6 +180,7 @@ int try(int client, int server, int num){
 int main(){
 	signal(SIGINT, sighandler);
 	signal(SIGTSTP, sighandler);
+	signal(SIGPIPE, sighandler);
 	handshake();
 	
 	int server = open("serverpipe", O_WRONLY);
