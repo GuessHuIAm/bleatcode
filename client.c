@@ -11,7 +11,7 @@
 #include "problemset.h"
 #include "csv.h"
 
-int solve(int num){
+int solve_prob(int client, int server, int num){
 	//int status;
 	//int f = fork();
 	//if (!f){
@@ -31,7 +31,7 @@ int solve(int num){
 	return 100;
 }
 
-int try(int num){
+int try(int client, int server, int num){
 	char output[1024];
 	int c;
 	read(client, &output, sizeof(output));
@@ -46,7 +46,7 @@ int try(int num){
 		return -1; // go back
 	int s = num;
 	while (s >= 0 && s < 20){
-		s = solve(num);
+		s = solve_prob(client, server, num);
 	}
 	if (s == 100) // success
 		return num;
@@ -96,18 +96,18 @@ int main(){
 	sleep(1);
 
 	struct problemset *ps = new_set();
-	print_set(name, ps);
 
 	int problem_number;
 
     	while(1){
+		print_set(name, ps);
         	printf("Which problem do you want to attempt? Please enter a number: \n");
         	scanf(" %d", &problem_number);
 		write(server, &problem_number, sizeof(problem_number));
 
 		int result;
-		result = try(problem_number);
-		
+		result = try(client, server, problem_number);
+
 		if (result >= 0){
 			solve(ps, result);
 		}
