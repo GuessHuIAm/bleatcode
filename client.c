@@ -54,6 +54,7 @@ void handshake(){
 	printf("Loaded!\n");
 	char hello[256];
 	read(client, hello, sizeof(hello));
+	printf("%s\n", hello);
 	remove(clientN);
 	
 	//Client sends response to server
