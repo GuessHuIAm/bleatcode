@@ -65,7 +65,7 @@ int main() {
 	handshake();
 
 	int server = open("serverpipe", O_RDONLY);
-	int client = open("client", O_WRONLY);
+	int client = open("clientpipe", O_WRONLY);
 	
 	int s;
 	char name[32];
