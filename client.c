@@ -47,7 +47,7 @@ int solve_prob(int client, int server, int num){
 
 int try(int client, int server, int num){
 	//char output[1024];
-	//int c;
+	int c;
 	//read(client, &output, sizeof(output));
 	printf("\nHere is the description for Problem %d:\n%s\n", num, descriptor(num));
 	sleep(1);
