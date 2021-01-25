@@ -24,6 +24,7 @@ static void sighandler(int signo) {
 	if (signo == SIGPIPE) {
 		printf("\nServer terminated. Sorry to see you go! Remember your ID so you can continue solving next time!\n");
 		exit(0);
+	}
 }
 
 void remove_files(){
