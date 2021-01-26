@@ -26,17 +26,9 @@ struct problemset *retrieve_set(int ID){
         int row = 0;
 	int column = 0;
 	int boolean = 0;
-        while (fgets(buffer, 100, fp)) {
-		// Splitting the data
-		char* value = strtok(buffer, ";");
-		while (value) {
-			boolean = atoi(value);
-			(set->problems)[row] = new_problem(row, boolean);
-			value = strtok(NULL, ";");
-			column++;
-			}
-		}
-		row++;
+	for (i = 0; i < 20; i++){
+		fscanf(fp, "%d", &boolean);
+		(set->problems)[i] = new_problem(i, boolean);
 	}
         // Close the file
         fclose(fp);
