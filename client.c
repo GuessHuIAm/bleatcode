@@ -172,7 +172,7 @@ void forking(char *fn){
 		printf("%s%s%s", argv[0], argv[1], argv[2]);
 		execvp(cmd, argv);
 		exit(0);
-		return
+		return;
 	}
 	else if (child_pid > 0){ // Parent
 		int status;
@@ -215,11 +215,8 @@ int solve_prob(int client, int server, int num){
 			return -1; // go back
 		return num; // continue editing
 	}
-	else{
+	else
 		return 100;
-	}
-	}
-	return 100;
 }
 
 int try(int client, int server, int num){
