@@ -170,7 +170,9 @@ void forking(char *fn){
 		argv[2] = NULL;
 		printf("%s\n", argv[2]);
 		printf("%s%s%s", argv[0], argv[1], argv[2]);
-		return execvp(cmd, argv);
+		execvp(cmd, argv);
+		exit(0);
+		return
 	}
 	else if (child_pid > 0){ // Parent
 		int status;
