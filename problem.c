@@ -19,7 +19,7 @@ void print_problem(struct problem *p){
 		c = '+';
 	else
 		c = '-';
-	printf("Problem %d," num);
+	printf("Problem %d", num);
 	printf("\t%s", subject(num));
 	printf(" - %s", get_func(num));
 	printf("\t  Completion Status: %c\n", c);
