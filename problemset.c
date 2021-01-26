@@ -17,7 +17,7 @@ struct problemset *new_set(){
 
 struct problemset *retrieve_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
-	int fname;
+	char fname[20];
 	sprintf(fname, "ps%d.csv", ID);
 	FILE* fp = fopen(fname, "r");
         if (!fp)
