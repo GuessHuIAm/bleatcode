@@ -4,11 +4,11 @@
 #include "problem.h"
 #include "csv.h"
 
-struct problem *new_problem(int num){
+struct problem *new_problem(int num, int boolean){
 	struct problem *np;
 	np = malloc(sizeof(struct problem));
 	np->id = num;
-	np->completion = 0;
+	np->completion = boolean;
 	return np;
 }
 
