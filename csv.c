@@ -191,7 +191,7 @@ char * get_tc3(int id){
 }
 
 char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
-	FILE* fp = fopen("the_extra_info.csv", "r");
+	FILE* fp = fopen("the_solutions.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
 	char buffer[size];
