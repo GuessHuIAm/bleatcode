@@ -55,7 +55,7 @@ void print_descriptor(int id){
                        	// Splitting the data
                        	char* value = strtok(buffer, ";");
                        	while (value) {
-                               	if (column == 2){
+                               	if (column == 3){
                                        	printf("%s", value);
                                	}
                       		value = strtok(NULL, ";");
