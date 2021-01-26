@@ -57,6 +57,8 @@ void update_user(struct problemset *ps, int ID){
 	sprintf(fname, "ps%d.txt", ID);
 	remove(fname); // remove old version
 	
+	int i, c;
+	
 	FILE* fp = fopen(fname, "w");
 	for (i = 0; i < 20; i++){
 		struct problem *p = (ps->problems)[i];
