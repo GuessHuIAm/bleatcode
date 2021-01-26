@@ -81,7 +81,7 @@ int main() {
 		}
 		else if (s == 2){ // request for edit file initiation
 			char fn[100];
-			message[1024];
+			char message[1024];
 			int num;
 			read(server, fn, sizeof(fn));
 			read(server, &num, sizeof(num));
