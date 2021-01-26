@@ -19,6 +19,7 @@ void print_problem(struct problem *p){
 		c = '+';
 	else
 		c = '-';
+	printf("<%s>", get_func(num));
 	printf("Problem %d\t%s / %s\t     Completion Status: %c\n", p->id, subject(p->id), get_func(num), c);
 	return;
 }
