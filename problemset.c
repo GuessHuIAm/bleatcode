@@ -39,7 +39,7 @@ struct problemset *retrieve_set(int ID){
 		return new_set(nextPS());
 	}
 	int boolean = 0;
-	int i = 0
+	int i;
 	for (i = 0; i < 20; i++){
 		fscanf(fp, "%d", &boolean);
 		(set->problems)[i] = new_problem(i, boolean);
