@@ -22,7 +22,7 @@ struct problemset *new_set(int ID){
 	for (i = 0; i < 20; i++){
 		struct problem *p = (set->problems)[i];
 		c = p->completion;
-		fprint(fp, "%d", c);
+		fprintf(fp, "%d", c);
 	}
 	// Close the file
 	fclose(fp);
@@ -63,7 +63,7 @@ void update_user(struct problemset *ps, int ID){
 	for (i = 0; i < 20; i++){
 		struct problem *p = (ps->problems)[i];
 		c = p->completion;
-		fputc(c, fp);
+		fprintf(fp, "%d", c);
 	}
 	
         // Close the file
