@@ -132,6 +132,7 @@ int find_id(int server, int client){
 		return nextid;
 	}
 }
+
 struct problemset *find_set(int id){
 	struct problemset *ps;
 	int nextid = nextPS();
@@ -225,7 +226,7 @@ int main(){
 	char name[32];
 	find_name(server, client, name);
 	int user_id = find_id(server, client);
-	struct problemset *ps = find_set(server, client);
+	struct problemset *ps = find_set(user_id);
 
 	int problem_number;
 	int c;
