@@ -15,6 +15,12 @@ struct problemset *new_set(){
 	return set;
 };
 
+struct problemset *retrieve_set(int ID){
+	struct problemset *set = malloc(sizeof(struct problemset));
+	
+	return set
+}
+
 void print_set(char *name, struct problemset *ps){
 	if (ps == NULL){
 		printf("Problem set is NULL\n");
