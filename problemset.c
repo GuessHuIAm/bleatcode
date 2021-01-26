@@ -40,7 +40,7 @@ struct problemset *retrieve_set(int ID){
 	}
         // Close the file
         fclose(fp);
-	return set
+	return set;
 }
 
 void print_set(char *name, struct problemset *ps){
