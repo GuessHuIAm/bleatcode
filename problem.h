@@ -7,7 +7,7 @@ struct problem {
 	int completion;
 };
 
-struct problem *new_problem(int num);
+struct problem *new_problem(int num, int boolean);
 void print_problem(struct problem *);
 
 #endif
