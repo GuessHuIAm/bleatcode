@@ -41,8 +41,10 @@ struct problemset *retrieve_set(int ID){
 	}
 	int boolean = 0;
 	int i;
+	char ch;
 	for (i = 0; i < 20; i++){
-		fscanf(fp, "%d", &boolean);
+		ch = fgetc(fp);
+		boolean = atoi(&ch);
 		(set->problems)[i] = new_problem(i, boolean);
 	}
         // Close the file
