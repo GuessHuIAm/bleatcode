@@ -86,13 +86,20 @@ int main() {
 			read(server, fn, sizeof(fn));
 			read(server, &num, sizeof(num));
 			printf("Received file <%s> for Problem %d. Will process now!\n", fn, num);
-			char type[] = get_type(num);
-			char func_name[] = get_func(num);
-			char parameters[] = get_para(num);
-			char type2[] = get_type2(num);
-			char tc1[] = get_tc1(num);
-			char tc2[] = get_tc2(num);
-			char tc3[] = get_tc3(num);
+			char type[32];
+			strcpy(type, get_type(num));
+			char func_name[32];
+			strcpy(func_name, get_func(num));
+			char parameters[64];
+			strcpy(parameters, get_para(num));
+			char type2[32]; 
+			strcpy(type2, get_type2(num));
+			char tc1[32];
+			strcpy(tc1, get_tc1(num));
+			char tc2[32];
+			strcpy(tc2, get_tc2(num));
+			char tc3[32];
+			strcpy(tc3, get_tc3(num));
 			sprintf(message, "%s %s(%s){\n\
 				\t// Write your code here!\n\
 				}\n\n\
