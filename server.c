@@ -108,6 +108,7 @@ int main() {
 				\tprintf(\"%s\", %s);\n\
 				\tprintf(\"%s\", %s);\n\
 				\tprintf(\"%s\", %s);\n\
+				\treturn 0;\n\
 				}\n", type, func_name, parameters, type2, tc1, type2, tc2, type2, tc3); // formatting initiation
 			
 			write(client, message, sizeof(message));
