@@ -240,11 +240,10 @@ int nextPS(){
 	int i = 0;
 	char fname[20];
 	sprintf(fname, "ps%d.txt", i);
-	while (access(fname, F_OK) == 0) { // file exists
+	while (access(fname, F_OK) == 0) { // if file exists, keep updating i
 		i++;
-		sprintf(fname, "ps%d.csv", i);
+		sprintf(fname, "ps%d.txt", i);
 	}
 	// file doesn't exist
-	i++;
 	return i;
 }
