@@ -31,10 +31,28 @@ int get_char(){
 	int c;
 	do {
 		c = getchar();
-	} while(c == '\n');
+	}while(c == '\n');
 	int o;
 	while ((o = getchar()) != '\n' && o != EOF) { } // remove other stuff
 	return c;
+}
+
+int get_problem_number(){
+	int number;
+	scanf(" %d", &number);
+	while (number < 0 || n > 19){
+		printf("Please enter a number between 0 and 19: "); 
+		scanf(" %d", &number);
+	}
+	return number;
+}
+
+int get_id(){
+	int id;
+	if (scanf(" %d", &id) == 1)
+		return id;
+	else
+		printf("Please enter a valid ID number: ");
 }
 
 void remove_files(){
@@ -119,8 +137,8 @@ int find_id(int server, int client){
 	printf("(Press 'y' to enter your ID. Press any other key to receive a new ID.)\n");
 	int c = get_char();
 	if (c == 'y'){
-		printf("Please enter your ID: \n");
-		scanf(" %d", &id);
+		printf("Please enter your ID: ");
+		id = get_id();
 		if (id >= nextid){
 			printf("The system couldn't find your ID. Your new ID is %d.\n", nextid);
 			return nextid;
@@ -167,7 +185,8 @@ void forking(char *fn){
 	else{
 		int pid = wait(&status);
 		pid = WEXITSTATUS(status);
-		sleep(2);
+		printf("Editing!\n\n");
+		sleep(1);
 	}
 }
 	//else if (child_pid > 0){ // Parent
@@ -197,7 +216,8 @@ int solve_prob(int client, int server, int num){
 		fclose(file);
 	}
 	forking(fn); // forking to edit in nano
-	printf("\nWelcome back! Let's test your code.\n");
+	
+	printf("Welcome back! Let's test your code.\n");
 	int test_result = test(server, client, fn, num);
 	// send to server and back and forth, if the solutions all match, break so this func returns 100
 	if (test_result < 0){
@@ -263,7 +283,7 @@ int main(){
     	while(1){
 		print_set(name, ps);
         	printf("\nWhich problem do you want to attempt? Please enter a number: ");
-        	scanf(" %d", &problem_number);
+        	problem_number = get_problem_number();
 
 		int result;
 		result = try(client, server, problem_number);
