@@ -39,16 +39,19 @@ void handshake(){
 static void sighandler(int signo) {
 	if (signo == SIGPIPE) {
 		printf("\nClient terminated. See you next time!\n");
+		remove("WKP");
 		handshake();
 	}
 	if (signo == SIGINT) {
 		printf("\nSorry to see you go!\n");
+		remove("WKP");
 		remove("serverpipe");
 		remove("clientpipe");
 		exit(0);
 	}
 	if (signo == SIGTSTP) {
 		printf("\nSorry to see you go!\n");
+		remove("WKP");
 		remove("serverpipe");
 		remove("clientpipe");
 		exit(0);
