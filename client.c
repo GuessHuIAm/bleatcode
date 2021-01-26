@@ -112,19 +112,36 @@ void find_name(int server, int client, char *name){
 	return;
 }
 
-struct problemset *find_set(int server, int client){
-	struct problemset *ps = new_set(server, client);
+int find_id(int server, int client){
+	int id;
+	int nextid = nextPS();
 	printf("\nDo you have a user ID from the last time you visited Bleet?\n");
 	printf("(Press 'y' to enter your ID. Press any other key to receive a new ID.)\n");
 	int c = get_char();
 	if (c == 'y'){
 		printf("Please enter your ID: \n");
-		return ps;
+		scanf(" %d", &id);
+		if (id >= nextid){
+			printf("The system couldn't find your ID. Your new ID is %d.\n", nextid);
+			return nextid;
+		}
+		else return id;
 	}
 	else{
-		printf("Your new ID is %d.\n", nextPS());
-		return ps;
+		printf("Your new ID is %d.\n", nextid);
+		return nextid;
 	}
+}
+struct problemset *find_set(int id){
+	struct problemset *ps;
+	int nextid = nextPS();
+	if (id >= nextid){
+		ps = new_set();
+	}
+	else {
+		ps = retrieve_set(id);
+	}
+	return ps;
 }
 
 int test(int client, int server, char *file_name, int num){
@@ -207,6 +224,7 @@ int main(){
 	
 	char name[32];
 	find_name(server, client, name);
+	int user_id = find_id(server, client);
 	struct problemset *ps = find_set(server, client);
 
 	int problem_number;
