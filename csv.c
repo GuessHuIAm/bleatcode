@@ -187,7 +187,7 @@ char * get_tc2(int id){
 	return helper2(id, 5);
 }
 char * get_tc3(int id){
-	return helper2(id, 6)
+	return helper2(id, 6);
 }
 
 char * helper3(int id, int col){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
