@@ -26,7 +26,7 @@ struct problemset *retrieve_set(int ID){
         int row = 0;
 	int column = 0;
 	int boolean = 0;
-        while (fgets(buffer, 1024, fp)) {
+        while (fgets(buffer, 100, fp)) {
 		// Splitting the data
 		char* value = strtok(buffer, ";");
 		while (value) {
