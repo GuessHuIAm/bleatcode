@@ -52,6 +52,23 @@ struct problemset *retrieve_set(int ID){
 	return set;
 }
 
+void update_user(struct problemset *ps, int ID){
+	char fname[20];
+	sprintf(fname, "ps%d.txt", ID);
+	remove(fname); // remove old version
+	
+	FILE* fp = fopen(fname, "w");
+	for (i = 0; i < 20; i++){
+		struct problem *p = (ps->problems)[i];
+		c = p->completion;
+		fputc(c, fp);
+	}
+	
+        // Close the file
+        fclose(fp);
+	return;
+}
+
 void print_set(char *name, struct problemset *ps){
 	if (ps == NULL){
 		printf("Problem set is NULL\n");
