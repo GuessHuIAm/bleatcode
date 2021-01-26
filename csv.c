@@ -35,8 +35,8 @@ void print_all(){
 			row++;
 		}
         // Close the file
+	free(buffer);
         fclose(fp);
-	}
 	return;
 }
 
@@ -65,10 +65,10 @@ void print_descriptor(int id){
 			}
 		}
                         row++;
-                }
+	}
         // Close the file
+	free(buffer);
         fclose(fp);
-        }
         return;
 }
 
@@ -98,6 +98,7 @@ void print_subject(int id){
 		row++;
         }
         // Close the file
+	free(buffer);
         fclose(fp);
         return;
 }
@@ -129,6 +130,7 @@ char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3
 		}
 		row++;
         }
+	free(buffer);
         fclose(fp);
         return "Can't find it";
 }
@@ -175,6 +177,7 @@ char * helper2(int id, int col, int size){ // col = 1->RETURNVALUE 2->PARAMETERS
 		}
 		row++;
         }
+	free(buffer);
         fclose(fp);
         return "Can't find it";
 }
@@ -225,6 +228,7 @@ char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3-
 		}
 		row++;
         }
+	free(buffer);
         fclose(fp);
         return "Can't find it";
 }
