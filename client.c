@@ -249,11 +249,13 @@ int main(){
 			printf("(Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
 			c = get_char(c);
 			if (c == 'n'){
-				printf("Sorry to see you go! Remember your ID is __ so you can continue solving next time!\n");
+				printf("Sorry to see you go! Remember your ID so you can continue solving next time!\n");
+				free(ps);
 				remove_files();
 				return 0;
 			}
 		}
 	}
+	free(ps);
 	return 0;
 }
