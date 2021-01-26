@@ -180,7 +180,6 @@ int solve_prob(int client, int server, int num){
 	}
 	else if (child_pid == 0){// Child
 		printf("Solving... \n");
-		sleep(1);
 		char *cmd = "nano";
 		char *argv[3];
 		argv[0] = "nano";
