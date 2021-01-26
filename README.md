@@ -1,4 +1,4 @@
-# PROJECT BLEETCODE
+# PROJECT BLEATCODE
 By Michael Hu & Mohammad Hamzah (Period 10) 
 ## Description of Project
 ## Required Libraries
