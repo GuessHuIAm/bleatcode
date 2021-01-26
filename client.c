@@ -14,15 +14,15 @@
 
 static void sighandler(int signo) {
 	if (signo == SIGINT) {
-		printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
+		printf("\nSorry to see you go--your progress was not saved! Good luck next time!\n");
 		exit(0);
 	}
 	if (signo == SIGTSTP) {
-		printf("\nSorry to see you go! Remember your ID so you can continue solving next time!\n");
+		printf("\nSorry to see you go--your progress was not saved! Good luck next time!!\n");
 		exit(0);
 	}
 	if (signo == SIGPIPE) {
-		printf("\nServer terminated. Sorry to see you go! Remember your ID so you can continue solving next time!\n");
+		printf("\nServer terminated--your progress was not saved. Good luck next time!\n");
 		exit(0);
 	}
 }
@@ -249,13 +249,16 @@ int main(){
 			printf("(Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
 			c = get_char(c);
 			if (c == 'n'){
-				printf("Sorry to see you go! Remember your ID so you can continue solving next time!\n");
+				update_user(ps, user_id);
+				printf("Sorry to see you go! Progress saved. Remember your ID (%d) so you can continue solving next time!\n", user_id);
 				free(ps);
 				remove_files();
 				return 0;
 			}
 		}
 	}
+	update_user(ps, user_id);
+	printf("Sorry to see you go! Progress saved. Remember your ID (%d) so you can continue solving next time!\n", user_id);
 	free(ps);
 	return 0;
 }
