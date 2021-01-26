@@ -137,7 +137,7 @@ struct problemset *find_set(int id){
 	struct problemset *ps;
 	int nextid = nextPS();
 	if (id >= nextid){
-		ps = new_set();
+		ps = new_set(id);
 	}
 	else {
 		ps = retrieve_set(id);
