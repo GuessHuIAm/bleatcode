@@ -174,8 +174,11 @@ int solve_prob(int client, int server, int num){
 		fclose(file);
 	}
 	
-	int f = fork();
-	if (!f){ // Child
+	pid_t child_pid = fork();
+	if (child_pid < 0){
+		printf("Error with forking!\n");
+	}
+	else if (child_pid == 0){// Child
 		printf("Solving... \n");
 		sleep(1);
 		char *cmd = "nano";
@@ -186,9 +189,9 @@ int solve_prob(int client, int server, int num){
 		printf("%s%s%s", argv[0], argv[1], argv[2]);
 		return execvp(cmd, argv);
 	}
-	else{ // Parent
+	else if (child_pid > 0){ // Parent
 		int status;
-		wait(&status);
+		waitpid(child_pid, &status, 0);
 		printf("\nWelcome back! Let's test your code.\n");
 		int test_result = test(server, client, fn, num);
 		// send to server and back and forth, if the solutions all match, break so this func returns 100
