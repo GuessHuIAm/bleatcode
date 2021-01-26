@@ -5,7 +5,7 @@ void print_all();
 void print_descriptor(int id);
 void print_subject(int id);
 
-char * helper1(int id, int col);
+char * helper1(int id, int col, int size);
 char * subject(int id);
 char * get_func(int id);
 char * descriptor(int id);
@@ -18,7 +18,7 @@ char * get_tc1(int id);
 char * get_tc2(int id);
 char * get_tc3(int id);
 
-char * helper3(int id, int col);
+char * helper3(int id, int col, int size);
 char * get_ta1(int id);
 char * get_ta2(int id);
 char * get_ta3(int id);
