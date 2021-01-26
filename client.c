@@ -159,7 +159,7 @@ int solve_prob(int client, int server, int num){
 		int s = 2; // communicator to server signal
 		write(server, &s, sizeof(s)); // request for edit file initiation
 		write(server, fn, sizeof(fn)); // send edit file name
-		write(server, %num, sizeof(num)); // sending problem number
+		write(server, &num, sizeof(num)); // sending problem number
 		
 		// reading message and then adding it onto the new file
 		char message[1024];
