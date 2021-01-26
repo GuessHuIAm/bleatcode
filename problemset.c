@@ -18,7 +18,8 @@ struct problemset *new_set(int ID){
 	int c;
 	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
-	FILE* fp = open(fname, "w");
+	FILE* fp = fopen(fname, "w");
+	int i;
 	for (i = 0; i < 20; i++){
 		struct problem *p = (set->problems)[i];
 		c = p->completion;
@@ -34,12 +35,12 @@ struct problemset *retrieve_set(int ID){
 	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
 	FILE* fp = fopen(fname, "r");
-        if (!fp)
-                printf("Can't open file\n");                                                                                                    else {
-	char buffer[100];
-        int row = 0;
-	int column = 0;
+        if (!fp){
+                printf("Can't open file\n");
+		return new_set(nextPS());
+	}
 	int boolean = 0;
+	int i = 0
 	for (i = 0; i < 20; i++){
 		fscanf(fp, "%d", &boolean);
 		(set->problems)[i] = new_problem(i, boolean);
