@@ -16,7 +16,7 @@ struct problemset *new_set(int ID){
 	}
 	
 	int c;
-	fname[20];
+	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
 	FILE* fp = open(fname, "w");
 	for (i = 0; i < 20; i++){
@@ -31,7 +31,7 @@ struct problemset *new_set(int ID){
 
 struct problemset *retrieve_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
-	fname[20];
+	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
 	FILE* fp = fopen(fname, "r");
         if (!fp)
