@@ -245,5 +245,6 @@ int nextPS(){
 		sprintf(fname, "ps%d.csv", i);
 	}
 	// file doesn't exist
+	i++;
 	return i;
 }
