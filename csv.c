@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 void print_all(){
 	FILE* fp = fopen("the_problems.csv", "r");
@@ -156,4 +157,16 @@ char * descriptor(int id){
         }
         fclose(fp);
         return "Can't find it\n";
+}
+
+int nextPS(){
+	int i = 0;
+	char fname[20];
+	sprintf(fname, "ps%d.csv", i);
+	while (access(fname, F_OK) == 0) { // file exists
+		i++;
+		sprintf(fname, "ps%d.csv", i);
+	}
+	// file doesn't exist
+	return i;
 }
