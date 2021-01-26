@@ -181,10 +181,14 @@ int solve_prob(int client, int server, int num){
 	else if (child_pid == 0){// Child
 		printf("Solving... \n");
 		char *cmd = "nano";
+		printf("%s\n", cmd);
 		char *argv[3];
 		argv[0] = "nano";
+		printf("%s\n", argv[0]);
 		strcpy(argv[1], fn);
+		printf("%s\n", argv[1]);
 		argv[2] = NULL;
+		printf("%s\n", argv[2]);
 		printf("%s%s%s", argv[0], argv[1], argv[2]);
 		return execvp(cmd, argv);
 	}
