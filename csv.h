@@ -10,7 +10,7 @@ char * subject(int id);
 char * get_func(int id);
 char * descriptor(int id);
 
-char * helper2(int id, int col);
+char * helper2(int id, int col, int size);
 char * get_type(int id);
 char * get_para(int id);
 char * get_type2(int id);
