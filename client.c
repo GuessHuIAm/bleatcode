@@ -224,7 +224,7 @@ int try(int client, int server, int num){
 	//read(client, &output, sizeof(output));
 	printf("\nHere is the description for Problem %d:\n", num);
 	printf("%s ", subject(num));
-	printf("- %s \n," get_func(num));
+	printf("- %s \n", get_func(num));
 	printf("%s\n", descriptor(num));
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
