@@ -152,6 +152,33 @@ int test(int client, int server, char *file_name, int num){
 	return -1;
 }
 
+void forking(char *fn){
+	pid_t child_pid = fork();
+	if (child_pid < 0){
+		printf("Error with forking!\n");
+	}
+	else if (child_pid == 0){// Child
+		printf("Solving... \n");
+		char *cmd = "nano";
+		printf("%s\n", cmd);
+		char *argv[3];
+		argv[0] = "nano";
+		printf("%s\n", argv[0]);
+		argv[1] = "t";
+		strcpy(argv[1], fn);
+		printf("%s\n", argv[1]);
+		argv[2] = NULL;
+		printf("%s\n", argv[2]);
+		printf("%s%s%s", argv[0], argv[1], argv[2]);
+		return execvp(cmd, argv);
+	}
+	else if (child_pid > 0){ // Parent
+		int status;
+		waitpid(child_pid, &status, 0);
+		return;
+	}
+}
+
 int solve_prob(int client, int server, int num){
 	char fn[100];
 	sprintf(fn, "file%d.c", num);
@@ -173,43 +200,22 @@ int solve_prob(int client, int server, int num){
 		fprintf(file, "%s", message);
 		fclose(file);
 	}
-	
-	pid_t child_pid = fork();
-	if (child_pid < 0){
-		printf("Error with forking!\n");
+	forking(fn); // forking to edit in nano
+	printf("\nWelcome back! Let's test your code.\n");
+	int test_result = test(server, client, fn, num);
+	// send to server and back and forth, if the solutions all match, break so this func returns 100
+	if (test_result < 0){
+		printf("Would you like to continue editing your code?\n");
+		printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
+		int c;
+		c = get_char(c);
+		if (c == 'n')
+			return -1; // go back
+		return num; // continue editing
 	}
-	else if (child_pid == 0){// Child
-		printf("Solving... \n");
-		char *cmd = "nano";
-		printf("%s\n", cmd);
-		char *argv[3];
-		argv[0] = "nano";
-		printf("%s\n", argv[0]);
-		strcpy(argv[1], fn);
-		printf("%s\n", argv[1]);
-		argv[2] = NULL;
-		printf("%s\n", argv[2]);
-		printf("%s%s%s", argv[0], argv[1], argv[2]);
-		return execvp(cmd, argv);
+	else{
+		return 100;
 	}
-	else if (child_pid > 0){ // Parent
-		int status;
-		waitpid(child_pid, &status, 0);
-		printf("\nWelcome back! Let's test your code.\n");
-		int test_result = test(server, client, fn, num);
-		// send to server and back and forth, if the solutions all match, break so this func returns 100
-		if (test_result < 0){
-			printf("Would you like to continue editing your code?\n");
-			printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
-			int c;
-			c = get_char(c);
-			if (c == 'n')
-				return -1; // go back
-			return num; // continue editing
-		}
-		else{
-			return 100;
-		}
 	}
 	return 100;
 }
