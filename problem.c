@@ -14,10 +14,11 @@ struct problem *new_problem(int num, int boolean){
 
 void print_problem(struct problem *p){
 	char c;
+	int num = p->id;
 	if (p->completion)
 		c = '+';
 	else
 		c = '-';
-	printf("Problem %d\t%s / %s\t     Completion Status: %c\n", p->id, subject(p->id), get_func(p->id), c);
+	printf("Problem %d\t%s / %s\t     Completion Status: %c\n", p->id, subject(p->id), get_func(num), c);
 	return;
 }
