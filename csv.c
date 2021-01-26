@@ -12,6 +12,7 @@ void print_all(){
 		int column = 0;
 		while (fgets(buffer, 1024, fp)) {
 			column = 0;
+			buffer[strcspn(buffer, "\n")] = '\0';
 			// Turning the ` into new lines
 			while (strchr(buffer, '`') != NULL){
 				*strchr(buffer, '`') = '\n';
@@ -48,6 +49,7 @@ void print_descriptor(int id){
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
 		if (row == id){
+			buffer[strcspn(buffer, "\n")] = '\0';
                 	// Turning the ` into new lines
                         while (strchr(buffer, '`') != NULL){
                                	*strchr(buffer, '`') = '\n';
@@ -79,6 +81,7 @@ void print_subject(int id){
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
 		if (row == id){
+			buffer[strcspn(buffer, "\n")] = '\0';
                 	// Turning the ` into new lines
                 	while (strchr(buffer, '`') != NULL){
 				*strchr(buffer, '`') = '\n';
@@ -108,6 +111,7 @@ char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
 		if (row == id){
+			buffer[strcspn(buffer, "\n")] = '\0';
                 	// Turning the ` into new lines
                 	while (strchr(buffer, '`') != NULL){
 				*strchr(buffer, '`') = '\n';
@@ -150,6 +154,7 @@ char * helper2(int id, int col, int size){ // col = 1->RETURNVALUE 2->PARAMETERS
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
 		if (row == id){
+			buffer[strcspn(buffer, "\n")] = '\0';
                 	// Turning the ` into new lines
                 	while (strchr(buffer, '`') != NULL){
 				*strchr(buffer, '`') = '\n';
@@ -199,6 +204,7 @@ char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3-
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
 		if (row == id){
+			buffer[strcspn(buffer, "\n")] = '\0';
                 	// Turning the ` into new lines
                 	while (strchr(buffer, '`') != NULL){
 				*strchr(buffer, '`') = '\n';
