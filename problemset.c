@@ -22,7 +22,7 @@ struct problemset *new_set(int ID){
 	for (i = 0; i < 20; i++){
 		struct problem *p = (set->problems)[i];
 		c = p->completion;
-		fputc(c, fp);
+		fprint(fp, "%d", c);
 	}
 	// Close the file
 	fclose(fp);
