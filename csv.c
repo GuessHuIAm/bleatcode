@@ -116,7 +116,6 @@ char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3
 			char* value = strtok(buffer, ";");
 			while (value) {
  				if (column == col){
-					printf("<%s>\n", value);
 					fclose(fp);
 					return value;
 				}
