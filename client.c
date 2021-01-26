@@ -146,7 +146,10 @@ struct problemset *find_set(int id){
 }
 
 int test(int client, int server, char *file_name, int num){
-	return 100;
+	int s; // communicator to server
+	// write(server, &s, sizeof(s)); // request for problem description
+	// write(server, &problem_number, sizeof(problem_number));
+	return -1;
 }
 
 int solve_prob(int client, int server, int num){
@@ -230,13 +233,10 @@ int main(){
 
 	int problem_number;
 	int c;
-	int s; // communicator to server
     	while(1){
 		print_set(name, ps);
         	printf("\nWhich problem do you want to attempt? Please enter a number: ");
         	scanf(" %d", &problem_number);
-		//write(server, &s, sizeof(s)); // request for problem description
-		//write(server, &problem_number, sizeof(problem_number));
 
 		int result;
 		result = try(client, server, problem_number);
