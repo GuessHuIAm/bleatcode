@@ -79,8 +79,32 @@ int main() {
 			write(client, name, sizeof(name));
 			printf("Acknowledgement sent.\n");
 		}
-		//else if (s == 2){ // request for problem set search
-		//}
+		else if (s == 2){ // request for edit file initiation
+			fn[100];
+			message[1024];
+			int num;
+			read(server, fn, sizeof(fn));
+			read(server, &num, sizeof(num));
+			printf("Received file <%s> for Problem %d. Will process now!\n", fn, num);
+			char type[32] = get_type(num);
+			char func_name[64] = get_func(num);
+			char parameters[64] = get_para(num);
+			char type2[32] = get_type2(num);
+			char tc1[32] = get_tc1(num);
+			char tc2[32] = get_tc2(num);
+			char tc3[32] = get_tc3(num);
+			sprintf(message, "%s %s(%s){\n\
+				\t// Write your code here!\n\
+				}\n\n\
+				int main(){\n\
+				\t// Don't touch the test cases here!\n\
+				\tprintf(\"%s\", %s);\n\
+				\tprintf(\"%s\", %s);\n\
+				\tprintf(\"%s\", %s);\
+				}", type, func_name, parameters, type2, tc1, type2, tc2, type2, tc3); // formatting initiation
+			
+			write(client, message, sizeof(message));
+		}
 		//else if (s == 3){ // request for solution check
 		//}
 		//else if (s == 4){ // request to solve the 
