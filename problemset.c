@@ -19,7 +19,6 @@ struct problemset *new_set(int ID){
 	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
 	FILE* fp = fopen(fname, "w");
-	int i;
 	for (i = 0; i < 20; i++){
 		struct problem *p = (set->problems)[i];
 		c = p->completion;
