@@ -82,7 +82,7 @@ void handshake(){
 
 void find_name(int server, int client, char *name){
 	//Client's intro, send username to server
-	printf("\n---------------------\nWelcome to BleetCode!\n---------------------\n\n");
+	printf("\n---------------------\nWelcome to BleatCode!\n---------------------\n\n");
 	sleep(0.5);
 	printf("Two more things before we begin!\n");
 	sleep(1);
@@ -115,7 +115,7 @@ void find_name(int server, int client, char *name){
 int find_id(int server, int client){
 	int id;
 	int nextid = nextPS();
-	printf("\nDo you have a user ID from the last time you visited Bleet?\n");
+	printf("\nDo you have a user ID from the last time you visited Bleat?\n");
 	printf("(Press 'y' to enter your ID. Press any other key to receive a new ID.)\n");
 	int c = get_char();
 	if (c == 'y'){
@@ -265,7 +265,7 @@ int main(){
 		}
 		else if (result == -10){
 			printf("Would you like to continue solving problems?\n");
-			printf("(Press 'n' to leave BleetCode. Press any other key to go back to your problem set.)\n");
+			printf("(Press 'n' to leave BleatCode. Press any other key to go back to your problem set.)\n");
 			c = get_char(c);
 			if (c == 'n'){
 				update_user(ps, user_id);
