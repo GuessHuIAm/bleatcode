@@ -24,7 +24,7 @@ csv.o: csv.h
 run:
 	./client
 
-server:
+runserver:
 	./server
 
 clean:
