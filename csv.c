@@ -162,7 +162,7 @@ char * descriptor(int id){
 int nextPS(){
 	int i = 0;
 	char fname[20];
-	sprintf(fname, "ps%d.csv", i);
+	sprintf(fname, "ps%d.txt", i);
 	while (access(fname, F_OK) == 0) { // file exists
 		i++;
 		sprintf(fname, "ps%d.csv", i);
