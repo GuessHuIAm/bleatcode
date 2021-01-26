@@ -1,5 +1,5 @@
-0;String;<FUNCNAME>;DESCRIPTOR`EXAMPLES
-1;String;<FUNCNAME>;DESCRIPTOR`EXAMPLES
+0;String;countWords;Write a program in C to count the total number of words in a string.`countWords("Hello, it's me.") = 2`countWords("You should go visit DWisCool.com") = 5
+1;String;countVowels>;Write a program in C to count total number of vowel in a string.`countVowels("Hello, it's me.") = 3`countVowels("You should go visit DWisCool.com") = 11
 2;String;<FUNCNAME>;DESCRIPTOR`EXAMPLES
 3;String;<FUNCNAME>;DESCRIPTOR`EXAMPLES
 4;Array;<FUNCNAME>;DESCRIPTOR`EXAMPLES
