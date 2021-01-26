@@ -11,13 +11,33 @@ struct problemset *new_set(){
 	struct problemset *set = malloc(sizeof(struct problemset));
     	int i;
 	for (i = 0; i < 20; i++)
-		(set->problems)[i] = new_problem(i);
+		(set->problems)[i] = new_problem(i, 0);
 	return set;
 };
 
 struct problemset *retrieve_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
-	
+	int fname;
+	sprintf(fname, "ps%d.csv", ID);
+	FILE* fp = fopen(fname, "r");
+        if (!fp)
+                printf("Can't open file\n");                                                                                                    else {
+        char buffer[1024];
+        int row = 0;
+        int column = 0;
+        while (fgets(buffer, 1024, fp)) {
+		// Splitting the data
+		char* value = strtok(buffer, ";");
+		while (value) {
+			printf("%s", value);
+			value = strtok(NULL, ";");
+			column++;
+			}
+		}
+		row++;
+	}
+        // Close the file
+        fclose(fp);
 	return set
 }
 
