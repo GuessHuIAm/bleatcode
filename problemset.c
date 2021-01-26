@@ -7,18 +7,32 @@
 #include "problem.h"
 #include "problemset.h"
 
-struct problemset *new_set(){
+struct problemset *new_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
+	
     	int i;
-	for (i = 0; i < 20; i++)
+	for (i = 0; i < 20; i++){
 		(set->problems)[i] = new_problem(i, 0);
+	}
+	
+	int c;
+	fname[20];
+	sprintf(fname, "ps%d.txt", ID);
+	FILE* fp = open(fname, "w");
+	for (i = 0; i < 20; i++){
+		struct problem *p = (set->problems)[i];
+		c = p->completion;
+		fputc(c, fp);
+	}
+	// Close the file
+	fclose(fp);
 	return set;
 };
 
 struct problemset *retrieve_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
-	char fname[20];
-	sprintf(fname, "ps%d.csv", ID);
+	fname[20];
+	sprintf(fname, "ps%d.txt", ID);
 	FILE* fp = fopen(fname, "r");
         if (!fp)
                 printf("Can't open file\n");                                                                                                    else {
