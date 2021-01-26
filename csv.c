@@ -103,7 +103,7 @@ char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3
 	FILE* fp = fopen("the_problems.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
-	char buffer[size];
+	char buffer[1024];
        	int row = 0;
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
@@ -145,7 +145,7 @@ char * helper2(int id, int col, int size){ // col = 1->RETURNVALUE 2->PARAMETERS
 	FILE* fp = fopen("the_extra_info.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
-	char buffer[size];
+	char buffer[1024];
        	int row = 0;
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
@@ -194,7 +194,7 @@ char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3-
 	FILE* fp = fopen("the_solutions.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
-	char buffer[size];
+	char buffer[1024];
        	int row = 0;
         int column = 0;
         while (fgets(buffer, 1024, fp)) {
