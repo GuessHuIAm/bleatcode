@@ -99,8 +99,8 @@ void print_subject(int id){
         return;
 }
 
-char * subject(int id){
-        FILE* fp = fopen("the_problems.csv", "r");
+char * helper1(int id, int col){ // col = 1->SUBJECT 2->FUNCTIONNAME 3->DESCRIPTOR
+	FILE* fp = fopen("the_problems.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
 	char buffer[1024];
@@ -115,7 +115,7 @@ char * subject(int id){
 			// Splitting the data
 			char* value = strtok(buffer, ";");
 			while (value) {
- 				if (column == 1){
+ 				if (column == col){
 					fclose(fp);
 					return value;
 				}
@@ -129,8 +129,20 @@ char * subject(int id){
         return "Can't find it";
 }
 
+char * subject(int id){
+	return helper1(id, 1);
+}
+
+char * get_func(int id){
+	return helper1(id, 2);
+}
+
 char * descriptor(int id){
-        FILE* fp = fopen("the_problems.csv", "r");
+	return helper1(id, 3);
+}
+
+char * helper2(int id, int col){ // col = 1->RETURNVALUE 2->PARAMETERS 3->%RETURNVALUE 4->TESTCASE1 5->TESTCASE2 6->TESTCASE3
+	FILE* fp = fopen("the_extra_info.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
 	char buffer[1024];
@@ -145,7 +157,7 @@ char * descriptor(int id){
 			// Splitting the data
 			char* value = strtok(buffer, ";");
 			while (value) {
- 				if (column == 2){
+ 				if (column == col){
 					fclose(fp);
 					return value;
 				}
@@ -156,7 +168,66 @@ char * descriptor(int id){
 		row++;
         }
         fclose(fp);
-        return "Can't find it\n";
+        return "Can't find it";
+}
+
+char * get_type(int id){
+	return helper2(id, 1);
+}
+char * get_para(int id){
+	return helper2(id, 2);
+}
+char * get_type2(int id){
+	return helper2(id, 3);
+}
+char * get_tc1(int id){
+	return helper2(id, 4);
+}
+char * get_tc2(int id){
+	return helper2(id, 5);
+}
+char * get_tc3(int id){
+	return helper2(id, 6)
+}
+
+char * helper3(int id, int col){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
+	FILE* fp = fopen("the_extra_info.csv", "r");
+        if (!fp)
+                printf("Can't open file\n");
+	char buffer[1024];
+       	int row = 0;
+        int column = 0;
+        while (fgets(buffer, 1024, fp)) {
+		if (row == id){
+                	// Turning the ` into new lines
+                	while (strchr(buffer, '`') != NULL){
+				*strchr(buffer, '`') = '\n';
+ 			}
+			// Splitting the data
+			char* value = strtok(buffer, ";");
+			while (value) {
+ 				if (column == col){
+					fclose(fp);
+					return value;
+				}
+				value = strtok(NULL, ";");
+				column++;
+			}
+		}
+		row++;
+        }
+        fclose(fp);
+        return "Can't find it";
+}
+
+char * get_ta1(int id){
+	return helper3(id, 1);
+}
+char * get_ta2(int id){
+	return helper3(id, 3);
+}
+char * get_ta3(int id){
+	return helper3(id, 3);
 }
 
 int nextPS(){
