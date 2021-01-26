@@ -162,13 +162,13 @@ int solve_prob(int client, int server, int num){
 		char message[1024];
 		read(client, message, sizeof(message));
 		
-		int file = fopen(fn, "w");
+		FILE* file = fopen(fn, "w");
 		// exiting program 
 		if (file == NULL) {
 			printf("Error!\n");
 		}
 		fprintf(file, "%s", message);
-		fclose(f);
+		fclose(file);
 	}
 	
 	int f = fork();
