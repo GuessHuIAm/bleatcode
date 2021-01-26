@@ -22,14 +22,16 @@ struct problemset *retrieve_set(int ID){
 	FILE* fp = fopen(fname, "r");
         if (!fp)
                 printf("Can't open file\n");                                                                                                    else {
-        char buffer[1024];
+	char buffer[100];
         int row = 0;
-        int column = 0;
+	int column = 0;
+	int boolean = 0;
         while (fgets(buffer, 1024, fp)) {
 		// Splitting the data
 		char* value = strtok(buffer, ";");
 		while (value) {
-			printf("%s", value);
+			boolean = atoi(value);
+			(set->problems)[row] = new_problem(row, boolean);
 			value = strtok(NULL, ";");
 			column++;
 			}
