@@ -153,25 +153,41 @@ int test(int client, int server, char *file_name, int num){
 }
 
 int solve_prob(int client, int server, int num){
-	int status;
+	char fn[100];
+	sprintf(fn, "file%d.c", num);
+	if (access(fn, F_OK) != 0){ // if this file does not exist
+		int s = 2; // communicator to server signal
+		write(server, &s, sizeof(s)); // request for edit file initiation
+		write(server, fn, sizeof(fn)); // send edit file name
+		char message[1024];
+		read(client, message, sizeof(message));
+		
+		int file = fopen(fn, "w");
+		// exiting program 
+		if (file == NULL) {
+			printf("Error!\n");
+		}
+		fprintf(file, "%s", message);
+		fclose(f);
+	}
+	
 	int f = fork();
-	if (!f){
+	if (!f){ // Child
 		printf("Solving... \n");
 		sleep(1);
 		char *cmd = "nano";
 		char *argv[3];
 		argv[0] = "nano";
-		sprintf(argv[1], "file%d.c", num);
+		strcpy(argv[1], fn);
 		argv[2] = NULL;
 		printf("%s%s%s", argv[0], argv[1], argv[2]);
 		return execvp(cmd, argv);
 	}
-	else{
+	else{ // Parent
+		int status;
 		wait(&status);
-		char file_name[100];
 		printf("\nWelcome back! Let's test your code.\n");
-		sprintf(file_name, "file%d.c", num);
-		int test_result = test(server, client, file_name, num);
+		int test_result = test(server, client, fn, num);
 		// send to server and back and forth, if the solutions all match, break so this func returns 100
 		if (test_result < 0){
 			printf("Would you like to continue editing your code?\n");
