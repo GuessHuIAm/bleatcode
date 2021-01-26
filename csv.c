@@ -36,37 +36,40 @@ void print_all(){
 		}
         // Close the file
         fclose(fp);
+	}
 	return;
 }
 
 void print_descriptor(int id){
 	FILE* fp = fopen("the_problems.csv", "r");
         if (!fp)
-                printf("Can't open file\n");                                                                                                    else {
-        char buffer[1024];
-        int row = 0;
-        int column = 0;
-        while (fgets(buffer, 1024, fp)) {
-		if (row == id){
-			buffer[strcspn(buffer, "\n")] = '\0';
-                	// Turning the ` into new lines
-                        while (strchr(buffer, '`') != NULL){
-                               	*strchr(buffer, '`') = '\n';
-                       	}
-                       	// Splitting the data
-                       	char* value = strtok(buffer, ";");
-                       	while (value) {
-                               	if (column == 3){
-                                       	printf("%s", value);
-                               	}
-                      		value = strtok(NULL, ";");
-                              	column++;
+                printf("Can't open file\n");
+	else {
+		char buffer[1024];
+		int row = 0;
+		int column = 0;
+		while (fgets(buffer, 1024, fp)) {
+			if (row == id){
+				buffer[strcspn(buffer, "\n")] = '\0';
+				// Turning the ` into new lines
+				while (strchr(buffer, '`') != NULL){
+					*strchr(buffer, '`') = '\n';
+				}
+				// Splitting the data
+				char* value = strtok(buffer, ";");
+				while (value) {
+					if (column == 3){
+						printf("%s", value);
+					}
+					value = strtok(NULL, ";");
+					column++;
+				}
 			}
+			row++;
 		}
-                        row++;
-	}
         // Close the file
         fclose(fp);
+	}
         return;
 }
 
