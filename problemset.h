@@ -8,6 +8,7 @@ struct problemset {
 struct problemset *new_set(int id);
 struct problemset *retrieve_set(int id);
 void print_set(char *name, struct problemset *ps);
+void update_user(struct problemset *ps, int ID);
 void solve(struct problemset *ps, int id);
 
 #endif
