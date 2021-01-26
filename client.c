@@ -114,12 +114,15 @@ void find_name(int server, int client, char *name){
 
 struct problemset *find_set(int server, int client){
 	struct problemset *ps = new_set(server, client);
-	printf("\nIs this your first time on Bleet? (Press 'n' if no. Press any other key to receive an ID.)\n");
+	printf("\nDo you have a user ID from the last time you went on Bleet?\n");
+	printf("(Press 'n' if no. Press any other key to receive an ID.)\n");
 	int c = get_char();
 	if (c == 'n'){
+		printf("Please enter your ID\n");
 		return ps;
 	}
 	else{
+		printf("Your new ID is %d.\n", nextPS());
 		return ps;
 	}
 }
