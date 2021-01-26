@@ -37,22 +37,24 @@ int get_char(){
 	return c;
 }
 
-int get_problem_number(){
-	int number;
-	scanf(" %d", &number);
-	while (number < 0 || n > 19){
-		printf("Please enter a number between 0 and 19: "); 
-		scanf(" %d", &number);
-	}
-	return number;
-}
-
 int get_id(){
 	int id;
-	if (scanf(" %d", &id) == 1)
-		return id;
-	else
-		printf("Please enter a valid ID number: ");
+	int args = scanf(" %d", &id);
+	while (args < 1){
+		scanf("%*[^\n]");
+   		printf("Please enter an integer value: ");
+		args = scanf("%d", &id);
+	}
+	return id;
+}
+
+int get_problem_number(){
+        int number = get_id();
+        while (number < 0 || number > 19){
+                printf("Please enter a number between 0 and 19: ");
+                number = get_id();
+        }
+        return number;
 }
 
 void remove_files(){
@@ -63,6 +65,7 @@ void remove_files(){
 		argv[0] = "rm";
 		argv[1] = "file*";
 		argv[2] = NULL;
+		printf("%s %s\n", argv[0], argv[1]);
 		execvp(cmd, argv);
 		return;
 	}
@@ -189,10 +192,6 @@ void forking(char *fn){
 		sleep(1);
 	}
 }
-	//else if (child_pid > 0){ // Parent
-	//	int status;
-	//	wait(&status);
-	//	return;}
 
 int solve_prob(int client, int server, int num){
 	char fn[100];
@@ -216,7 +215,7 @@ int solve_prob(int client, int server, int num){
 		fclose(file);
 	}
 	forking(fn); // forking to edit in nano
-	
+
 	printf("Welcome back! Let's test your code.\n");
 	int test_result = test(server, client, fn, num);
 	// send to server and back and forth, if the solutions all match, break so this func returns 100
@@ -235,13 +234,13 @@ int solve_prob(int client, int server, int num){
 
 int try(int client, int server, int num){
 	int c;
-	//read(client, &output, sizeof(output));
+	sleep(1);
 	printf("\nHere is the description for Problem %d:\n", num);
 	printf("%s ", subject(num));
 	printf("- %s \n", get_func(num));
 	printf("%s\n", descriptor(num));
 	sleep(1);
-        printf("Do you want to try and solve Problem %d?\n", num);
+        printf("\nDo you want to try and solve Problem %d?\n", num);
 	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.) ");
 	sleep(1);
 	c = get_char(c);
@@ -280,6 +279,7 @@ int main(){
 
 	int problem_number;
 	int c;
+
     	while(1){
 		print_set(name, ps);
         	printf("\nWhich problem do you want to attempt? Please enter a number: ");
