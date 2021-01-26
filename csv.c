@@ -134,14 +134,17 @@ char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3
 }
 
 char * subject(int id){
+	printf("subject() == %s", helper1(id, 1, 32));
 	return helper1(id, 1, 32);
 }
 
 char * get_func(int id){
+	printf("get_func() == %s", helper1(id, 2, 32));
 	return helper1(id, 2, 32);
 }
 
 char * descriptor(int id){
+	printf("descriptor() == %s", helper1(id, 3, 32));
 	return helper1(id, 3, 1024);
 }
 
