@@ -31,6 +31,7 @@ struct problemset *new_set(int ID){
 
 struct problemset *retrieve_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
+	printf("Getting your problem set... \n");
 	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
 	FILE* fp = fopen(fname, "r");
