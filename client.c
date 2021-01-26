@@ -211,7 +211,7 @@ int solve_prob(int client, int server, int num){
 int try(int client, int server, int num){
 	int c;
 	//read(client, &output, sizeof(output));
-	printf("\nHere is the description for Problem %d:\n%s\n", num, descriptor(num));
+	printf("\nHere is the description for Problem %d:\n%s - %s\n%s\n", num, subject(num), get_func(num), descriptor(num));
 	sleep(1);
         printf("Do you want to try and solve Problem %d?\n", num);
 	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.) ");
