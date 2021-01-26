@@ -21,15 +21,13 @@ problemset.o: problemset.c csv.h
 csv.o: csv.h
 	gcc -c csv.c
 
-runclient:
+run:
 	./client
 
-runserver:
+server:
 	./server
 
 clean:
 	rm *.o
-
-clear:
 	rm client
 	rm server
