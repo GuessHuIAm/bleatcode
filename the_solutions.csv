@@ -1,4 +1,4 @@
-0~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3
+0~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~char str[str_size];`int i, wrd;`i = 0;`wrd = 1;`while(string[i]!='\0'){`if(string[i]==' ' || string[i]=='\n' || string[i]=='\t'){`wrd++;`}`i++;`}`return (wrd - 1);
 1~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3
 2~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3
 3~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3
