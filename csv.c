@@ -243,6 +243,18 @@ char * get_solution(int id){
 	return helper3(id, 4);
 }
 
+char * get_testcase1(){
+	return helper4(1);
+}
+
+char * get_testcase2(){
+	return helper4(2);
+}
+
+char * get_testcase3(){
+	return helper4(3);
+}
+
 int nextPS(){
 	int i = 0;
 	char fname[20];
