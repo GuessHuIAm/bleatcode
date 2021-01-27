@@ -207,7 +207,7 @@ void forking(char *fn){
 	int status;
 	int f = fork();
 	if (!f){
-		int pid = getpid();                                                                                                             //      char *cmd = "nano";
+		int pid = getpid();
        		char *argv[3];
       		argv[0] = "nano";
         	argv[1] = fn;
@@ -247,7 +247,7 @@ int solve_prob(int client, int server, int num){
 	forking(fn); // forking to edit in nano
 
 	printf("Welcome back! Let's test your code.\n");
-	int test_result = test(server, client, fn, num);
+	int test_result = test(client, server, fn, num);
 	// send to server and back and forth, if the solutions all match, break so this func returns 100
 	if (test_result < 0){
 		printf("Would you like to continue editing your code?\n");
@@ -268,7 +268,7 @@ int try(int client, int server, int num){
 	sleep(1);
 	printf("\nHere is the description for Problem %d:\n", num);
 	printf("<%s ", subject(num));
-	printf("- %s> \n", get_func(num));
+	printf("- %*s> \n", 15, get_func(num));
 	printf("%s\n", descriptor(num));
 	sleep(1);
         printf("\nDo you want to try and solve Problem %d?\n", num);
@@ -322,8 +322,8 @@ int main(){
 		if (result >= 0){
 			solve(ps, result); // updating problem set with completion status
 		}
-		
-		printf("Would you like to see the solution for Problem %d? (Only available for Problem 0)\n", problem_number);
+
+		printf("\nWould you like to see the solution for Problem %d? (Only available for Problem 0)\n", problem_number);
 		printf("(Press 'y' to see a solution. Press any other key to continue.)");
 		c = get_char(c);
 		if (c == 'y'){
@@ -332,7 +332,7 @@ int main(){
 			sleep(2);
 		}
 
-		printf("Would you like to return to your problem sets?\n");
+		printf("\nWould you like to return to your problem sets?\n");
 		printf("(Press 'n' to leave BleatCode. Press any other key to go back to your problem set.)\n");
 		c = get_char(c);
 		if (c == 'n'){

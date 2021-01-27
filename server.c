@@ -103,19 +103,7 @@ int main() {
 			strcpy(tc2, get_tc2(num));
 			char tc3[32];
 			strcpy(tc3, get_tc3(num));
-			sprintf(message, "#include <stdio.h>\n\
-				#include <stdlib.h>\n\
-				#include <string.h>\n\
-				%s %s(%s){\n\
-				\t// Write your code here!\n\
-				}\n\n\
-				int main(){\n\
-				\t// Don't touch the test cases here!\n\
-				\tprintf(\"%s`\", %s);\n\
-				\tprintf(\"%s`\", %s);\n\
-				\tprintf(\"%s`\", %s);\n\
-				\treturn 0;\n\
-				}\n", type, func_name, parameters, type2, tc1, type2, tc2, type2, tc3); // formatting initiation
+			sprintf(message, "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n%s %s(%s){\n\t// Write your code here!\n}\n\nint main(){\n\t// Don't touch the test cases here!\n\tFILE *fn = fopen(\"solution.txt\",  \"w\");\n\tfprintf(fn, \"\%s`\", %s);\n\tfprintf(fn, \"\%s`\", %s);\n\tfprintf(fn, \"\%s`\", %s);\n\tfclose(fn);\n\treturn 0;\n}\n", type, func_name, parameters, type2, tc1, type2, tc2, type2, tc3); // formatting initiation
 
 			write(client, message, sizeof(message));
 		}
@@ -132,11 +120,9 @@ int main() {
 			int f = fork();
 			if (!f){
 				int pid = getpid();
-				char *argv[4];
+				char *argv[2];
 				argv[0] = "./a.out";
-				argv[1] = ">";
-				argv[2] = "solution.txt";
-				argv[3] = NULL;
+				argv[1] = NULL;
 				execvp(argv[0], argv);
 			}
 			else{
@@ -144,16 +130,22 @@ int main() {
 				pid = WEXITSTATUS(status);
 				char testc1[50];
 				strcpy(testc1, get_testcase1());
+
 				char testc2[50];
 				strcpy(testc2, get_testcase2());
+
 				char testc3[50];
 				strcpy(testc3, get_testcase3());
+
 				char tests1[50];
 				strcpy(tests1, get_ta1(prob_num));
+
 				char tests2[50];
 				strcpy(tests2, get_ta2(prob_num));
+
 				char tests3[50];
 				strcpy(tests3, get_ta3(prob_num));
+
 				if (!strcmp(testc1, tests1) && !strcmp(testc2, tests2) && !strcmp(testc3, testc3)){
 					result = 10;
 					printf("Test cases were successful!\n");
@@ -162,13 +154,9 @@ int main() {
 					result = -1;
 					printf("Test cases were unsuccessful.\n");
 				}
-				sprintf(message, "System: %s = %s; You: %s = %s\n\
-					System: %s = %s; You: %s = %s\n\
-					System: %s = %s; You: %s = %s\n",
-					get_tc1(prob_num), tests1, get_tc1(prob_num), testc1,
-					get_tc2(prob_num), tests2, get_tc2(prob_num), testc2,
-					get_tc3(prob_num), tests3, get_tc3(prob_num), testc3
-				);
+				sprintf(message, "System: %s = %s; You: %s = %s\n", get_tc1(prob_num), tests1, get_tc1(prob_num), testc1);
+				sprintf(message + strlen(message), "System: %s = %s; You: %s = %s\n", get_tc2(prob_num), tests2, get_tc2(prob_num), testc2);
+				sprintf(message + strlen(message), "System: %s = %s; You: %s = %s\n", get_tc3(prob_num), tests3, get_tc3(prob_num), testc3);
 			}
 			write(client, &result, sizeof(result));
 			write(client, message, sizeof(message));

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -244,31 +245,35 @@ char * get_solution(int id){
 }
 
 char * helper4(int r){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
-	FILE* fp = fopen("solution.txt", "r");
-        if (!fp)
-                printf("Can't open file\n");
-	char buffer[1024];
-	char buffer2[256];
-	while (fgets(buffer2, sizeof(buffer2), fp)) {
-		strcat (buffer, buffer2);
-	}
+        FILE *f = fopen("solution.txt", "r");
+	fseek(f, 0, SEEK_END);
+	long fsize = ftell(f);
+	fseek(f, 0, SEEK_SET);  /* same as rewind(f); */
+
+	char *string = malloc(fsize + 1);
+	fread(string, 1, fsize, f);
+	fclose(f);
+
+	string[fsize] = 0;
+	char buffer[1028];
+
+	strcpy(buffer, string);
+	free(string);
+	remove("solution.txt");
+
+	printf("buffer: %s\n", buffer);
+
 	int row = 1;
-	int c;
-        // Turning the ` into new lines
-        while (strchr(buffer, '`') != NULL){
-		*strchr(buffer, '`') = '\n';
-	}
 	// Splitting the data
 	char* value = strtok(buffer, "`");
 	while (value) {
- 		if (row = r){
-			fclose(fp);
+ 		if (row == r){
+			printf("value = %s\n", value);
 			return value;
 		}
 		value = strtok(NULL, "`");
-			row++;
+		row++;
 	}
-        fclose(fp);
         return "Can't find it";
 }
 
