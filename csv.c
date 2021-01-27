@@ -249,8 +249,9 @@ char * helper4(int r){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
                 printf("Can't open file\n");
 	char buffer[1024];
 	int row = 1;
+	int c;
     	while ((c = getc(fp)) != EOF)
-        	strncat(buffer, c);
+        	strncat(buffer, &c, 1);
         // Turning the ` into new lines
         while (strchr(buffer, '`') != NULL){
 		*strchr(buffer, '`') = '\n';
