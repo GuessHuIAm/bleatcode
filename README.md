@@ -2,8 +2,7 @@
 By Michael Hu (Period 10) 
 
 ## About Bleat
-A very primitive project attempting to simulate a live coding environment like Coding Bat. Each user has an ID linked to a problem set that will keep track of problem-solving progression.
-A user can choose a problem from a set of 20 problems (adapted from [w3resources](https://www.w3resource.com/c-programming-exercises/)) and read about each (description, examples, etc.). Then, the user can edit a solution file using nano and submit the file after for testing with a few test cases.
+A very primitive project attempting to simulate a live coding environment like Coding Bat. Each user has an ID linked to a problem set that will keep track of problem-solving progression. A user can choose a problem from a set of 20 problems (adapted from [w3resources](https://www.w3resource.com/c-programming-exercises/)) and read about each (description, examples, etc.). Then, the user can edit a solution file using nano and submit the file after for testing with a few test cases.
 
 ## Required Libraries
 - fcntl.h
@@ -39,6 +38,8 @@ A user can choose a problem from a set of 20 problems (adapted from [w3resources
    - If you succeed, this problem will be marked as complete on your problem set. You don't get any congratulations for finishing your set. Maybe bragging rights?
    - You have the option to look at solutions (the only solution that is available currently is the solution for Problem 0);
    
-5. To exit, the prompt will guide you to an exit after you attempt one problem. Your progress will be saved to your ID.
+5. To exit the client, the prompt will guide you to an exit after you attempt one problem. Your progress will be saved to your ID.
    - To exit abruptly, either `Ctrl Z,` `Ctrl X,` or `Ctrl C`. Unfortunately, your progress will not be saved to your ID when you exit.
    - If the client exits either naturally or abruptly (not due to a bug), the server will wait with a handshake for a new client.
+     - To exit the server, use either `Ctrl Z,` or `Ctrl C`.
+   - I kept track of the data in the program using semi-colon-separated files, and one tilde-separated file.
