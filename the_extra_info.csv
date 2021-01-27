@@ -1,21 +1,20 @@
-0;int;char * string;%d\n;countWords("Who are you?");countWords("I at chicken for dinner.\nGood night");countWords("  ")
-1;int;char * string;%d\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-2;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-3;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-4;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-5;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-6;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-7;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-8;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-9;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-10;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-11;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-12;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-13;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-14;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-15;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-16;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-17;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-18;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-19;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
-20;RETURN VALUE;PARAMETERS;%RETURN VALUES\n;TEST CASE 1;TEST CASE 2;TEST CASE 3
+0;int;char * string;%d\n;countWords("Who are you?");countWords("I ate chicken for dinner.\nGood night");countWords("  ")
+1;int;char * string;%d\n;countVowels("Who are you?);countVowels("I ate chicken for dinner.\nGood night");countVowels("Hotdogs")
+2;char;char * string;%c\n;occurMost("BobbbtheBuilder");occurMost("ABCDEFGHIJKLMN\n\t");occurMost("\n\n\n\nBAB");
+3;char *;char * string;%s\n;uppercase("Hello!");uppercase("I ate chicken for dinner.\nGood night");uppercase("Gahhh!   Spaces!\t")
+4;int;char * string1, char * string2;%d\n;compare("Hello", "hellO");compare("Bobbab\n\n\t", "Bobbab\n\n\n\t");compare("\tHere I come...", "Here I come...")
+5;int;int num;%d\n;reverse(123);reverse(0123456);reverse(-71758)
+6;int;int num;%d\n;palindrome(1001);palindrome(12002);palindrome(-1221221)
+7;int;int num;%d\n;totalOne(30);totalOne(12);totalOne(100);
+8;int;int num;%d\n;powerOfThree(45);powerOfThree(-81);powerOfThree(81);
+9;int;int num;%d\n;nToN(9);nToN(13);nToN(15)
+10;int;int num;%d\n;naturalSum(10);naturalSum(7);naturalSum(20)
+11;int;int num;%d\n;factorial(1);factorial(12);factorial(17)
+12;int;int num;%d\n;armstrong(1);armstrong(153);armstrong(200)
+13;int;int num;%d\n;prime(2);prime(73);prime(200)
+14;int;int num;%d\n;binary(10);binary(100);binary(1000)
+15;int;int n1, int n2;%d\n;rSum(5, 10);rSum(-15, -10);rSum(1, 10)
+16;int;int num;%d\n;digitSum(53);digitSum(843);digitSum(-1024)
+17;int;int n1, int n2;%d\n;gcd(28, 42);gcd(9, 10);gcd(15, -50)
+18;int;int n1, int n2;%d\n;lcm(6, 15);lcm(15, 10);lcm(17, 13)
+19;int;int n1, int n2;%d\n;power(2, 6);power(4, 5);power(5, 0)
