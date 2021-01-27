@@ -24,6 +24,10 @@ char * get_ta2(int id);
 char * get_ta3(int id);
 char * get_solution(int id);
 
+char * get_testcase1();
+char * get_testcase2();
+char * get_testcase3();
+
 int nextPS();
 
 #endif

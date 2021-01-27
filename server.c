@@ -105,6 +105,7 @@ int main() {
 			strcpy(tc3, get_tc3(num));
 			sprintf(message, "#include <stdio.h>\n\
 				#include <stdlib.h>\n\
+				#include <string.h>\n\
 				%s %s(%s){\n\
 				\t// Write your code here!\n\
 				}\n\n\
@@ -139,15 +140,39 @@ int main() {
 			else{
 				int pid = wait(&status);
 				pid = WEXITSTATUS(status);
-				//if (access("a.out", F_OK) == 0){
-				//	printf("success\n");
-				//}
+				char testc1[] = get_testcase1();
+				char testc2[] = get_testcase2();
+				char testc3[] = get_testcase3();
+				char tests1[] = get_ta1(prob_num);
+				char tests2[] = get_ta2(prob_num);
+				char tests3[] = get_ta3(prob_num);
+				if (!strcmp(testc1, tests1) && !strcmp(testc2, tests2) && !strcmp(testc3, testc3)){
+					result = 10;
+					printf("Test cases were successful!\n");
+				}
+				else {
+					result = -1;
+					printf("Test cases were unsuccessful.\n");
+				}
+				sprintf(message, "System: %s = %s; You: %s = %s\n\
+					System: %s = %s; You: %s = %s\n\
+					System: %s = %s; You: %s = %s\n",
+					get_tc1(prob_num), tests1, get_tc1(prob_num), testc1,
+					get_tc2(prob_num), tests2, get_tc2(prob_num), testc2,
+					get_tc3(prob_num), tests1, get_tc3(prob_num), testc3
+				);
 			}
 			write(client, &result, sizeof(result));
 			write(client, message, sizeof(message));
+			remove("a.out");
 		}
-		//else if (s == 4){ // request to solve the 
-		//}
+		else if (s == 4){ // request to get solution
+				int id;
+				read(server, &id, sizeof(id));
+				char message[512];
+				sprintf(message, "Solution for Problem %d:\n%s", id, get_solution(id));
+				write(client, message, sizeof(message));
+		}
 	}
 	return 0;
 }
