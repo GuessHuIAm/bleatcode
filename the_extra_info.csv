@@ -9,7 +9,7 @@
 8;int;int num;%d\n;powerOfThree(45);powerOfThree(-81);powerOfThree(81);
 9;int;int num;%d\n;nToN(9);nToN(13);nToN(15)
 10;int;int num;%d\n;naturalSum(10);naturalSum(7);naturalSum(20)
-11;int;int num;%d\n;factorial(1);factorial(12);factorial(17)
+11;int;int num;%d\n;factorial(1);factorial(12);factorial(7)
 12;int;int num;%d\n;armstrong(1);armstrong(153);armstrong(200)
 13;int;int num;%d\n;prime(2);prime(73);prime(200)
 14;int;int num;%d\n;binary(10);binary(100);binary(1000)
