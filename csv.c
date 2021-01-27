@@ -145,7 +145,7 @@ char * get_func(int id){
 }
 
 char * descriptor(int id){
-	printf("descriptor() == %s", helper1(id, 3, 32));
+	//printf("descriptor() == %s", helper1(id, 3, 32));
 	return helper1(id, 3, 1024);
 }
 
