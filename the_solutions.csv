@@ -1,20 +1,20 @@
-0~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~char str[str_size];`int i, wrd;`i = 0;`wrd = 1;`while(string[i]!='\0'){`if(string[i]==' ' || string[i]=='\n' || string[i]=='\t'){`wrd++;`}`i++;`}`return (wrd - 1);
-1~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-2~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-3~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-4~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-5~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-6~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-7~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-8~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-9~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-10~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-11~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-12~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-13~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-14~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-15~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-16~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-17~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-18~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
-19~TEST ANSWER1~TEST ANSWER2~TEST ANSWER3~Not available yet. Check back soon!
+0~3~7~0~char str[str_size];`int i, wrd;`i = 0;`wrd = 1;`while(string[i]!='\0'){`if(string[i]==' ' || string[i]=='\n' || string[i]=='\t'){`wrd++;`}`i++;`}`return (wrd - 1);
+1~5~11~2~Not available yet. Check back soon!
+2~b~A~B~Not available yet. Check back soon!
+3~HELLO!~I ATE CHICKEN FOR DINNER.\nGOOD NIGHT~HOT DOGS~Not available yet. Check back soon!
+4~0~-1~1~Not available yet. Check back soon!
+5~321~654321~-85717~Not available yet. Check back soon!
+6~1~0~0~Not available yet. Check back soon!
+7~13~5~2~Not available yet. Check back soon!
+8~0~0~1~Not available yet. Check back soon!
+9~9~1~2~Not available yet. Check back soon!
+10~5~28~210~Not available yet. Check back soon!
+11~1~479001600~5040~Not available yet. Check back soon!
+12~1~1~0~Not available yet. Check back soon!
+13~1~1~0~Not available yet. Check back soon!
+14~1010~1100100~1111101000~Not available yet. Check back soon!
+15~45~-75~55~Not available yet. Check back soon!
+16~8~15~-7~Not available yet. Check back soon!
+17~14~1~5~Not available yet. Check back soon!
+18~30~30~221~Not available yet. Check back soon!
+19~64~1024~1~Not available yet. Check back soon!
