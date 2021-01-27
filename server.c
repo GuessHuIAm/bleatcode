@@ -149,7 +149,7 @@ int main() {
 				char tests1[100];
 				strcpy(tests1, get_ta1(prob_num));
 				char tests2[100];
-				strcpy(tests2, get_ta2(prob_num))
+				strcpy(tests2, get_ta2(prob_num));
 				char tests3[100];
 				strcpy(tests3, get_ta3(prob_num));
 				if (!strcmp(testc1, tests1) && !strcmp(testc2, tests2) && !strcmp(testc3, testc3)){
