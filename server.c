@@ -140,7 +140,7 @@ int main() {
 			else{
 				int pid = wait(&status);
 				pid = WEXITSTATUS(status);
-				char testc1[100]
+				char testc1[100];
 				strcpy(testc1, get_testcase1());
 				char testc2[100];
 				strcpy(testc2, get_testcase2());
