@@ -243,6 +243,32 @@ char * get_solution(int id){
 	return helper3(id, 4);
 }
 
+char * helper4(int r){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
+	FILE* fp = fopen("solution.txt", "r");
+        if (!fp)
+                printf("Can't open file\n");
+	char buffer[1024];
+	int row = 1;
+    	while ((c = getc(fp)) != EOF)
+        	strncat(buffer, c);
+        // Turning the ` into new lines
+        while (strchr(buffer, '`') != NULL){
+		*strchr(buffer, '`') = '\n';
+	}
+	// Splitting the data
+	char* value = strtok(buffer, "`");
+	while (value) {
+ 		if (row = r){
+			fclose(fp);
+			return value;
+		}
+		value = strtok(NULL, "`");
+			row++;
+	}
+        fclose(fp);
+        return "Can't find it";
+}
+
 char * get_testcase1(){
 	return helper4(1);
 }
