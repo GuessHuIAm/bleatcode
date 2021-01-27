@@ -111,8 +111,7 @@ void find_name(int server, int client, char *name){
 	while(1){
 		printf("What is your name? ");
 		scanf(" %32[^\n]", name);
-		sleep(0.5);
-		printf("\nIs your name %s? (Press 'n' to change your name. Press any other key to continue.)\n", name);
+		printf("\nIs your name %s? (Enter 'n' to change your name. Enter any other key to continue.)\n", name);
 		do{
 			c = get_char(c);
 		} while (c == '\n');
@@ -135,7 +134,7 @@ int find_id(int server, int client){
 	int id;
 	int nextid = nextPS();
 	printf("\nDo you have a user ID from the last time you visited Bleat?\n");
-	printf("(Press 'y' to enter your ID. Press any other key to receive a new ID.)\n");
+	printf("(Enter 'y' to enter your ID. Press any other key to receive a new ID.)\n");
 	int c = get_char();
 	if (c == 'y'){
 		printf("Please enter your ID: ");
@@ -196,7 +195,7 @@ int test(int client, int server, char *file_name, int num){
 				return num;
 		}
 		else{
-			printf("Sorry, program wasn't successfully compiled.\n");
+			printf("Sorry, your program wasn't successfully compiled.\n");
 			return -1;
 		}
  	}
@@ -251,7 +250,7 @@ int solve_prob(int client, int server, int num){
 	// send to server and back and forth, if the solutions all match, break so this func returns 100
 	if (test_result < 0){
 		printf("Would you like to continue editing your code?\n");
-		printf("(Press 'n' to go back to your problem set. Press any other key to continue editing.)\n");
+		printf("(Enter 'n' to go back to your problem set. Enter any other key to continue editing.)\n");
 		int c;
 		c = get_char(c);
 		if (c == 'n')
@@ -272,7 +271,7 @@ int try(int client, int server, int num){
 	printf("%s\n", descriptor(num));
 	sleep(1);
         printf("\nDo you want to try and solve Problem %d?\n", num);
-	printf("(Press 'n' to go back to see your problems. Press any other key to continue solving.) ");
+	printf("(Enter 'n' to go back to see your problems. Enter any other key to continue solving.) ");
 	sleep(1);
 	c = get_char(c);
 	if (c == 'n')
@@ -324,7 +323,7 @@ int main(){
 		}
 
 		printf("\nWould you like to see the solution for Problem %d? (Only available for Problem 0)\n", problem_number);
-		printf("(Press 'y' to see a solution. Press any other key to continue.)");
+		printf("(Enter 'y' to see a solution. Enter any other key to continue.)");
 		c = get_char(c);
 		if (c == 'y'){
 			printf("Solution for Problem %d:\n%s", problem_number, get_solution(problem_number));
@@ -333,7 +332,7 @@ int main(){
 		}
 
 		printf("\nWould you like to return to your problem sets?\n");
-		printf("(Press 'n' to leave BleatCode. Press any other key to go back to your problem set.)\n");
+		printf("(Enter 'n' to leave BleatCode. Enter any other key to go back to your problem set.)\n");
 		c = get_char(c);
 		if (c == 'n'){
 			update_user(ps, user_id);

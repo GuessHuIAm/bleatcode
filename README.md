@@ -1,8 +1,10 @@
 # PROJECT BLEATCODE
 By Michael Hu (Period 10) 
+
 ## About Bleat
 A very primitive project attempting to simulate a live coding environment like Coding Bat. Each user has an ID linked to a problem set that will keep track of problem-solving progression.
 A user can choose a problem from a set of 20 problems (adapted from [w3resources](https://www.w3resource.com/c-programming-exercises/)) and read about each (description, examples, etc.). Then, the user can edit a solution file using nano and submit the file after for testing with a few test cases.
+
 ## Required Libraries
 - fcntl.h
 - unistd.h
@@ -14,6 +16,7 @@ A user can choose a problem from a set of 20 problems (adapted from [w3resources
 - sys/types.h
 - sys/wait.h
 - time.h
+
 ## Instructions
 1. Get everything ready by using make!
    - `$ make`
