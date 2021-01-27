@@ -103,7 +103,7 @@ void print_subject(int id){
         return;
 }
 
-char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3->DESCRIPTOR
+char * helper1(int id, int col){ // col = 1->SUBJECT 2->FUNCTIONNAME 3->DESCRIPTOR
 	FILE* fp = fopen("the_problems.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
@@ -136,20 +136,20 @@ char * helper1(int id, int col, int size){ // col = 1->SUBJECT 2->FUNCTIONNAME 3
 
 char * subject(int id){
 	//printf("subject() == %s", helper1(id, 1, 32));
-	return helper1(id, 1, 32);
+	return helper1(id, 1);
 }
 
 char * get_func(int id){
 	//printf("get_func() == %s", helper1(id, 2, 32));
-	return helper1(id, 2, 32);
+	return helper1(id, 2);
 }
 
 char * descriptor(int id){
 	//printf("descriptor() == %s", helper1(id, 3, 32));
-	return helper1(id, 3, 1024);
+	return helper1(id, 3);
 }
 
-char * helper2(int id, int col, int size){ // col = 1->RETURNVALUE 2->PARAMETERS 3->%RETURNVALUE 4->TESTCASE1 5->TESTCASE2 6->TESTCASE3
+char * helper2(int id, int col){ // col = 1->RETURNVALUE 2->PARAMETERS 3->%RETURNVALUE 4->TESTCASE1 5->TESTCASE2 6->TESTCASE3
 	FILE* fp = fopen("the_extra_info.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
@@ -181,25 +181,25 @@ char * helper2(int id, int col, int size){ // col = 1->RETURNVALUE 2->PARAMETERS
 }
 
 char * get_type(int id){
-	return helper2(id, 1, 32);
+	return helper2(id, 1);
 }
 char * get_para(int id){
-	return helper2(id, 2, 64);
+	return helper2(id, 2);
 }
 char * get_type2(int id){
-	return helper2(id, 3, 32);
+	return helper2(id, 3);
 }
 char * get_tc1(int id){
-	return helper2(id, 4, 32);
+	return helper2(id, 4);
 }
 char * get_tc2(int id){
-	return helper2(id, 5, 32);
+	return helper2(id, 5);
 }
 char * get_tc3(int id){
-	return helper2(id, 6, 32);
+	return helper2(id, 6);
 }
 
-char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
+char * helper3(int id, int col){ // col = 1->SOLUTION1 2->SOLUTION2 3->SOLUTION3
 	FILE* fp = fopen("the_solutions.csv", "r");
         if (!fp)
                 printf("Can't open file\n");
@@ -214,13 +214,13 @@ char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3-
 				*strchr(buffer, '`') = '\n';
  			}
 			// Splitting the data
-			char* value = strtok(buffer, ";");
+			char* value = strtok(buffer, "~");
 			while (value) {
  				if (column == col){
 					fclose(fp);
 					return value;
 				}
-				value = strtok(NULL, ";");
+				value = strtok(NULL, "~");
 				column++;
 			}
 		}
@@ -231,13 +231,16 @@ char * helper3(int id, int col, int size){ // col = 1->SOLUTION1 2->SOLUTION2 3-
 }
 
 char * get_ta1(int id){
-	return helper3(id, 1, 64);
+	return helper3(id, 1);
 }
 char * get_ta2(int id){
-	return helper3(id, 2, 64);
+	return helper3(id, 2);
 }
 char * get_ta3(int id){
-	return helper3(id, 3, 64);
+	return helper3(id, 3);
+}
+char * get_solution(int id){
+	return helper3(id, 4);
 }
 
 int nextPS(){
