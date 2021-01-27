@@ -140,17 +140,17 @@ int main() {
 			else{
 				int pid = wait(&status);
 				pid = WEXITSTATUS(status);
-				char testc1[100];
+				char testc1[50];
 				strcpy(testc1, get_testcase1());
-				char testc2[100];
+				char testc2[50];
 				strcpy(testc2, get_testcase2());
-				char testc3[100];
+				char testc3[50];
 				strcpy(testc3, get_testcase3());
-				char tests1[100];
+				char tests1[50];
 				strcpy(tests1, get_ta1(prob_num));
-				char tests2[100];
+				char tests2[50];
 				strcpy(tests2, get_ta2(prob_num));
-				char tests3[100];
+				char tests3[50];
 				strcpy(tests3, get_ta3(prob_num));
 				if (!strcmp(testc1, tests1) && !strcmp(testc2, tests2) && !strcmp(testc3, testc3)){
 					result = 10;
@@ -165,7 +165,7 @@ int main() {
 					System: %s = %s; You: %s = %s\n",
 					get_tc1(prob_num), tests1, get_tc1(prob_num), testc1,
 					get_tc2(prob_num), tests2, get_tc2(prob_num), testc2,
-					get_tc3(prob_num), tests1, get_tc3(prob_num), testc3
+					get_tc3(prob_num), tests3, get_tc3(prob_num), testc3
 				);
 			}
 			write(client, &result, sizeof(result));
