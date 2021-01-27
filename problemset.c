@@ -9,12 +9,12 @@
 
 struct problemset *new_set(int ID){
 	struct problemset *set = malloc(sizeof(struct problemset));
-	
+
     	int i;
 	for (i = 0; i < 20; i++){
 		(set->problems)[i] = new_problem(i, 0);
 	}
-	
+
 	int c;
 	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
@@ -56,16 +56,16 @@ void update_user(struct problemset *ps, int ID){
 	char fname[20];
 	sprintf(fname, "ps%d.txt", ID);
 	remove(fname); // remove old version
-	
+
 	int i, c;
-	
+
 	FILE* fp = fopen(fname, "w");
 	for (i = 0; i < 20; i++){
 		struct problem *p = (ps->problems)[i];
 		c = p->completion;
 		fprintf(fp, "%d", c);
 	}
-	
+
         // Close the file
         fclose(fp);
 	return;
@@ -76,7 +76,7 @@ void print_set(char *name, struct problemset *ps){
 		printf("Problem set is NULL\n");
 		return;
 	}
-	printf("%s's Problem Set!\n", name);
+	printf("\n%s's Problem Set\n", name);
 
 	int i;
 	struct problem *p;

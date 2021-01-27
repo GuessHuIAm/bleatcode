@@ -167,10 +167,18 @@ struct problemset *find_set(int id){
 }
 
 int test(int client, int server, char *file_name, int num){
-	int s; // communicator to server
-	// write(server, &s, sizeof(s)); // request for problem description
-	// write(server, &problem_number, sizeof(problem_number));
-	return -1;
+	int s = 3; // communicator to server
+	write(server, &s, sizeof(s)); // request for problem description
+	write(server, file_name, sizeof(file_name));
+	write(server, &num, sizeof(num));
+
+	char message[512];
+	int result;
+	read(client, &result, sizeof(result));
+	read(client, message, sizeof(message));
+	printf("Test results: \n%s\n", message);
+
+	return result; // -1 for no, positive numbers for yes
 }
 
 void forking(char *fn){
@@ -225,19 +233,20 @@ int solve_prob(int client, int server, int num){
 		int c;
 		c = get_char(c);
 		if (c == 'n')
-			return -1; // go back
+			return -1; // you gave up, back to problem set
 		return num; // continue editing
 	}
-	else
-		return 100;
+	else{
+		return 100; // you did it!
+	}
 }
 
 int try(int client, int server, int num){
 	int c;
 	sleep(1);
 	printf("\nHere is the description for Problem %d:\n", num);
-	printf("%s ", subject(num));
-	printf("- %s \n", get_func(num));
+	printf("<%s ", subject(num));
+	printf("- %s> \n", get_func(num));
 	printf("%s\n", descriptor(num));
 	sleep(1);
         printf("\nDo you want to try and solve Problem %d?\n", num);
