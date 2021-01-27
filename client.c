@@ -328,7 +328,7 @@ int main(){
 		c = get_char(c);
 		if (c == 'y'){
 			printf("Solution for Problem %d:\n%s", problem_number, get_solution(problem_number));
-			printf("\n");
+			printf("\n\n");
 			sleep(2);
 		}
 
