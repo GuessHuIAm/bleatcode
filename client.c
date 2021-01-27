@@ -322,8 +322,17 @@ int main(){
 		if (result >= 0){
 			solve(ps, result); // updating problem set with completion status
 		}
+		
+		printf("Would you like to see the solution for Problem %d? (Only available for Problem 0)\n", problem_number);
+		printf("(Press 'y' to see a solution. Press any other key to continue.)");
+		c = get_char(c);
+		if (c == 'y'){
+			printf("Solution for Problem %d:\n%s", problem_number, get_solution(problem_number));
+			printf("\n");
+			sleep(2);
+		}
 
-		printf("Would you like to continue solving problems?\n");
+		printf("Would you like to return to your problem sets?\n");
 		printf("(Press 'n' to leave BleatCode. Press any other key to go back to your problem set.)\n");
 		c = get_char(c);
 		if (c == 'n'){
