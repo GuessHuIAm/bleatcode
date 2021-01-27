@@ -2,7 +2,7 @@
 By Michael Hu (Period 10) 
 ## About Bleat
 A very primitive project attempting to simulate a live coding environment like Coding Bat. Each user has an ID linked to a problem set that will keep track of problem-solving progression.
-A user can choose a problem from a problem set and read what it's about (description, examples, etc.) and then edit the a solutioni file using nano. After, the user can submit the file for testing with a few cases.
+A user can choose a problem from a set of 20 problems (adapted from [w3resources](https://www.w3resource.com/c-programming-exercises/)) and read what it's about (description, examples, etc.) and then edit the a solutioni file using nano. After, the user can submit the file for testing with a few cases.
 ## Required Libraries
 - fcntl.h
 - unistd.h
