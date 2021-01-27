@@ -22,5 +22,8 @@ A user can choose a problem from a problem set and read what it's about (descrip
    - `make run`
 3. The prompt will ask you a series of introductory questions!
    - What is your name?
-   - Have you been on Bleetcode before? If so, enter your ID to return to your problem set progression.
+   - Have you been on Bleetcode before? If so, enter your ID to return to your problem set.
 4. After, you will be directed to your problem set! From here, you can choose a problem from Problem 0 to Problem 19.
+
+Other things!
+- To exit abruptly, either `CONTROL Z`, `CONTROL C, or 
