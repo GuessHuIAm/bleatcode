@@ -1,4 +1,4 @@
-0~3~7~0~char str[str_size];`int i, wrd;`i = 0;`wrd = 1;`while(string[i]!='\0'){`if(string[i]==' ' || string[i]=='\n' || string[i]=='\t'){`wrd++;`}`i++;`}`return (wrd - 1);
+0~3~7~0~char str[str_size];`int i, wrd;`i = 0;`wrd = 1;`while(string[i]!='\0'){`\tif(string[i]==' ' || string[i]=='\n' || string[i]=='\t'){`\t\twrd++;`\t}`\\ti++;`}`return (wrd - 1);
 1~5~11~2~Not available yet. Check back soon!
 2~b~A~B~Not available yet. Check back soon!
 3~HELLO!~I ATE CHICKEN FOR DINNER.\nGOOD NIGHT~HOT DOGS~Not available yet. Check back soon!
