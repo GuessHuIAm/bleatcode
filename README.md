@@ -2,7 +2,7 @@
 By Michael Hu (Period 10) 
 ## About Bleat
 A very primitive project attempting to simulate a live coding environment like Coding Bat. Each user has an ID linked to a problem set that will keep track of problem-solving progression.
-A user can choose a problem from a set of 20 problems (adapted from [w3resources](https://www.w3resource.com/c-programming-exercises/)) and read what it's about (description, examples, etc.) and then edit the a solutioni file using nano. After, the user can submit the file for testing with a few cases.
+A user can choose a problem from a set of 20 problems (adapted from [w3resources](https://www.w3resource.com/c-programming-exercises/)) and read about each (description, examples, etc.). Then, the user can edit a solution file using nano and submit the file after for testing with a few test cases.
 ## Required Libraries
 - fcntl.h
 - unistd.h
@@ -22,8 +22,12 @@ A user can choose a problem from a set of 20 problems (adapted from [w3resources
    - `$ make run`
 3. The prompt will ask you a series of introductory questions!
    - What is your name?
-   - Have you been on Bleetcode before? If so, enter your ID to return to your problem set.
+   - Have you been on Bleetcode before?
+     - If so, enter your ID to return to your problem set.
+     - If not, you will receive a new ID and a new problem set. 
 4. After, you will be directed to your problem set! From here, you can choose a problem from Problem 0 to Problem 19.
-
-Other things!
-- To exit abruptly, either `Ctrl Z,` `Ctrl X,` or `Ctrl C`. Unfortunately, your progress will not be saved to your ID when you exit.
+   - The user prompt should guide your movement through the program.
+   - You may choose to try and solve a problem using nano. The file will not disappear in your session, so you may return to it even after you try another problem.
+   - You have the option to look at solutions (the only solution that is available currently is the solution for Problem 0);
+5. To exit, the prompt will guide you to an exit after you attempt one problem. Your progress will be saved to your ID.
+   - To exit abruptly, either `Ctrl Z,` `Ctrl X,` or `Ctrl C`. Unfortunately, your progress will not be saved to your ID when you exit.
