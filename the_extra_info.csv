@@ -5,7 +5,7 @@
 4;int;char * string1, char * string2;%d\n;compare("Hello", "hellO");compare("Bobbab\n\n\t", "Bobbab\n\n\n\t");compare("\tHere I come...", "Here I come...")
 5;int;int num;%d\n;reverse(123);reverse(0123456);reverse(-71758)
 6;int;int num;%d\n;palindrome(1001);palindrome(12002);palindrome(-1221221)
-7;int;int num;%d\n;totalOne(30);totalOne(12);totalOne(100);
+7;int;int num;%d\n;totalOne(30);totalOne(12);totalOne(10);
 8;int;int num;%d\n;powerOfThree(45);powerOfThree(-81);powerOfThree(81);
 9;int;int num;%d\n;nToN(9);nToN(13);nToN(15)
 10;int;int num;%d\n;naturalSum(10);naturalSum(7);naturalSum(20)
