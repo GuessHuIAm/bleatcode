@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <signal.h>
 #include "problem.h"
 #include "problemset.h"
@@ -18,27 +19,29 @@ void handshake(){
 	read(server, clientN, sizeof(clientN));
 	printf("Client pipe %s was connected.\n", clientN);
 	remove("WKP");
-	
+
 	//Server writes back to client
 	int client = open(clientN, O_WRONLY);
 	printf("Connected to client.\n");
     	char message[] = "The handshake is complete. Let's get started!\n";
     	write(client, message, sizeof(message));
     	printf("Sent welcome message to client %s.\n", clientN);
-	     
+
 	//Server receives client's message
 	char handshake[256];
     	read(server, handshake, sizeof(handshake));
     	printf("From the client: %s\n", handshake);
 	close(client);
     	close(server);
-	     
+
 	return;
 }
 
 static void sighandler(int signo) {
 	if (signo == SIGPIPE) {
 		printf("\nClient terminated. See you next time!\n");
+		remove("serverpipe");
+		remove("clientpipe");
 		remove("WKP");
 		handshake();
 	}
@@ -68,7 +71,7 @@ int main() {
 
 	int server = open("serverpipe", O_RDONLY);
 	int client = open("clientpipe", O_WRONLY);
-	
+
 	int s;
 	char name[32];
 	while(1){
@@ -92,7 +95,7 @@ int main() {
 			strcpy(func_name, get_func(num));
 			char parameters[64];
 			strcpy(parameters, get_para(num));
-			char type2[32]; 
+			char type2[32];
 			strcpy(type2, get_type2(num));
 			char tc1[32];
 			strcpy(tc1, get_tc1(num));
@@ -100,7 +103,9 @@ int main() {
 			strcpy(tc2, get_tc2(num));
 			char tc3[32];
 			strcpy(tc3, get_tc3(num));
-			sprintf(message, "%s %s(%s){\n\
+			sprintf(message, "#include <stdio.h>\n\
+				#include <stdlib.h>\n\
+				%s %s(%s){\n\
 				\t// Write your code here!\n\
 				}\n\n\
 				int main(){\n\
@@ -110,14 +115,38 @@ int main() {
 				\tprintf(\"%s\", %s);\n\
 				\treturn 0;\n\
 				}\n", type, func_name, parameters, type2, tc1, type2, tc2, type2, tc3); // formatting initiation
-			
+
 			write(client, message, sizeof(message));
 		}
-		//else if (s == 3){ // request for solution check
-		//}
+		else if (s == 3){ // request for solution comparison
+			int prob_num;
+			read(server, &prob_num, sizeof(prob_num));
+
+			int result; // -1 for not a match
+			char message[512];
+
+			int status;
+			int f = fork();
+			if (!f){
+				int pid = getpid();
+				char *argv[4];
+				argv[0] = "./a.out";
+				argv[1] = ">";
+				argv[2] = "solution.txt";
+				argv[3] = NULL;
+				execvp(argv[0], argv);
+			}
+			else{
+				int pid = wait(&status);
+				pid = WEXITSTATUS(status);
+				//if (access("a.out", F_OK) == 0){
+				//	printf("success\n");
+				//}
+			}
+			write(client, &result, sizeof(result));
+			write(client, message, sizeof(message));
+		}
 		//else if (s == 4){ // request to solve the 
-		//}
-		//else if (s == 5){ 
 		//}
 	}
 	return 0;

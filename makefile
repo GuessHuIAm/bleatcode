@@ -1,4 +1,5 @@
 all: client server
+	make clean
 
 client: client.o problem.o problemset.o csv.o
 	gcc -o client client.o problem.o problemset.o csv.o
@@ -29,5 +30,8 @@ runserver:
 
 clean:
 	rm *.o
+
+restart:
 	rm client
 	rm server
+	make

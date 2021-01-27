@@ -12,16 +12,30 @@
 #include "problemset.h"
 #include "csv.h"
 
+void remove_files(){
+	int i;
+	char fn[32];
+	for (i = 0; i < 20; i++){
+		sprintf(fn, "file%d.c", i);
+		if (access(fn, F_OK) == 0)
+			remove(fn);
+	}
+	return;
+}
+
 static void sighandler(int signo) {
 	if (signo == SIGINT) {
+		remove_files();
 		printf("\nSorry to see you go--your progress was not saved! Good luck next time!\n");
 		exit(0);
 	}
 	if (signo == SIGTSTP) {
+		remove_files();
 		printf("\nSorry to see you go--your progress was not saved! Good luck next time!!\n");
 		exit(0);
 	}
 	if (signo == SIGPIPE) {
+		remove_files();
 		printf("\nServer terminated--your progress was not saved. Good luck next time!\n");
 		exit(0);
 	}
@@ -55,22 +69,6 @@ int get_problem_number(){
                 number = get_id();
         }
         return number;
-}
-
-void remove_files(){
-	int f = fork();
-	if (!f){
-		char *cmd = "rm";
-		char *argv[3];
-		argv[0] = "rm";
-		argv[1] = "file*";
-		argv[2] = NULL;
-		printf("%s %s\n", argv[0], argv[1]);
-		execvp(cmd, argv);
-		return;
-	}
-	else
-		return;
 }
 
 void handshake(){
@@ -167,18 +165,42 @@ struct problemset *find_set(int id){
 }
 
 int test(int client, int server, char *file_name, int num){
-	int s = 3; // communicator to server
-	write(server, &s, sizeof(s)); // request for problem description
-	write(server, file_name, sizeof(file_name));
-	write(server, &num, sizeof(num));
-
-	char message[512];
-	int result;
-	read(client, &result, sizeof(result));
-	read(client, message, sizeof(message));
-	printf("Test results: \n%s\n", message);
-
-	return result; // -1 for no, positive numbers for yes
+	// compilation stage
+	int status;
+	int f = fork();
+	if (!f){
+		int pid = getpid();
+		char *argv[3];
+		argv[0] = "gcc";
+ 		argv[1] = file_name;
+ 		argv[2] = NULL;
+		execvp(argv[0], argv);
+	}
+	else{
+		int pid = wait(&status);
+		pid = WEXITSTATUS(status);
+		if (access("a.out", F_OK) == 0){
+			printf("Program successfully compiled!\n");
+			int s = 3; // communicator to server
+			write(server, &s, sizeof(s)); // request for answer comparison
+			write(server, &num, sizeof(num));
+			char message[512];
+ 			int result;
+        		read(client, &result, sizeof(result));
+        		read(client, message, sizeof(message));
+        		printf("Test results: \n%s\n", message);
+			if (result == -1){
+				printf("Sorry, you didn't pass the test cases.\n");
+				return -1;
+			}
+				return num;
+		}
+		else{
+			printf("Sorry, program wasn't successfully compiled.\n");
+			return -1;
+		}
+ 	}
+	// -1 for no, positive numbers for yes
 }
 
 void forking(char *fn){
@@ -300,17 +322,16 @@ int main(){
 		if (result >= 0){
 			solve(ps, result); // updating problem set with completion status
 		}
-		else if (result == -10){
-			printf("Would you like to continue solving problems?\n");
-			printf("(Press 'n' to leave BleatCode. Press any other key to go back to your problem set.)\n");
-			c = get_char(c);
-			if (c == 'n'){
-				update_user(ps, user_id);
-				printf("Sorry to see you go! Progress saved. Remember your ID (%d) so you can continue solving next time!\n", user_id);
-				free(ps);
-				remove_files();
-				return 0;
-			}
+
+		printf("Would you like to continue solving problems?\n");
+		printf("(Press 'n' to leave BleatCode. Press any other key to go back to your problem set.)\n");
+		c = get_char(c);
+		if (c == 'n'){
+			update_user(ps, user_id);
+			printf("Sorry to see you go! Progress saved. Remember your ID (%d) so you can continue solving next time!\n", user_id);
+			free(ps);
+			remove_files();
+			return 0;
 		}
 	}
 	update_user(ps, user_id);
