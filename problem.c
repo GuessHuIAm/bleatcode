@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,7 +22,7 @@ void print_problem(struct problem *p){
 		c = '-';
 	printf("Problem %d", num);
 	printf("\t%s", subject(num));
-	printf(" - %s", get_func(num));
-	printf("\t  Completion Status: %c\n", c);
+	printf(" - %*s", 15, get_func(num));
+	printf("\t Completion Status: %c\n", c);
 	return;
 }

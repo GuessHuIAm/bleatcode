@@ -126,6 +126,8 @@ int main() {
 			int result; // -1 for not a match
 			char message[512];
 
+			printf("Client asking for a solution check...\n");
+
 			int status;
 			int f = fork();
 			if (!f){
@@ -171,13 +173,6 @@ int main() {
 			write(client, &result, sizeof(result));
 			write(client, message, sizeof(message));
 			remove("a.out");
-		}
-		else if (s == 4){ // request to get solution
-				int id;
-				read(server, &id, sizeof(id));
-				char message[512];
-				sprintf(message, "Solution for Problem %d:\n%s", id, get_solution(id));
-				write(client, message, sizeof(message));
 		}
 	}
 	return 0;

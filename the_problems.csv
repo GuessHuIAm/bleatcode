@@ -1,18 +1,18 @@
-0;String;countWords;Write a program in C to count the total number of words in a string.`countWords("Hello, it's me.") = 2`countWords("You should go visit DWisCool.com") = 5
-1;String;countVowels;Write a program in C to count total number of vowel in a string.`countVowels("Hello, it's me.") = 3`countVowels("You should go visit DWisCool.com") = 11
-2;String;occurMost;Write a program in C to find the maximum occuring character (character that appears first if there are multiple) in a string.`occurMost("Hello, it's me.") = 'e'`occurMost("You should go visit DWisCool.com") = 'o'
-3;String;uppercase;Write a program in C to convert a string to uppercase.`uppercase("Hello, it's me.") = "HELLO, IT'S ME."`uppercase("You should go visit DWisCool.com") = "YOU SHOULD GO VISIT DWISCOOL.COM" 
-4;String;compare;Write a program in C to compare the length of two strings without using string library functions. Return 1 if the first string is longer, -1 if the second string is longer, and 0 if the two strings are the same length.`compare("Hello, it's me.", "You should go visit DWisCool.com") = -1 
-5;Math;reverse;Write a C program to reverse the digits of a given integer.`reverse(123) = 321`reverse(208478933) = 339874802`reverse(-73634) = -43637
-6;Math;palindrome;Write a C program to check whether an integer is a palindrome or not. An integer is a palindrome when it reads the same forward as backward. Return 1 if it is palindrome and return 0 if it is not.`palindrome(-121) = 0`palindrome(1220) = 0`palindrome(1221) = 1 
-7;Math;totalOne;Write a C program to count the total number of digit 1 appearing in all positive integers less than or equal to a given integer n.`totalOne(12) = 5 // (1), (1)0, (1)(1), (1)2 `totalOne(30) = 13
-8;Math;powerOfThree;Write a C programming to check if a given integer is a power of three. Return 1 if true, 0 if false.`powerOfThree(81) = 1`powerOfThree(45) = 0
-9;Math;nToN;Write a C programming to find the nth digit of number 1 to n.`nToN(12) = 1`nToN(7) = 7
-10;Loop;naturalSum;Write a C program to find the sum of the first n natural numbers.`naturalSum(10) = 55`naturalSum(7) = 28
-11;Loop;factorial;Write a C program to calculate the factorial of a given number.`factorial(3) = 6`factorial(5) = 120
-12;Loop;armstrong;Write a C program to check whether a given number is an Armstrong number or not, returning 1 if true and 0 if false. Armstrong number is a number that is equal to the sum of cubes of its digits.`armstrong(153) = 1`armstrong(300) = 0
-13;Loop;prime;Write a C program to determine whether a given number is prime or not, returning 1 if true and 0 if false.`prime(13) = 1`prime(8) = 0
-14;Loop;binary;Write a program in C to convert a decimal number into "binary" integer of 1s and 0s without using an array.`binary(25) = 11001`binary(40) = 101000
+0;String   ;countWords;Write a program in C to count the total number of words in a string.`countWords("Hello, it's me.") = 2`countWords("You should go visit DWisCool.com") = 5
+1;String   ;countVowels;Write a program in C to count total number of vowel in a string.`countVowels("Hello, it's me.") = 3`countVowels("You should go visit DWisCool.com") = 11
+2;String   ;occurMost;Write a program in C to find the maximum occuring character (character that appears first if there are multiple) in a string.`occurMost("Hello, it's me.") = 'e'`occurMost("You should go visit DWisCool.com") = 'o'
+3;String   ;uppercase;Write a program in C to convert a string to uppercase.`uppercase("Hello, it's me.") = "HELLO, IT'S ME."`uppercase("You should go visit DWisCool.com") = "YOU SHOULD GO VISIT DWISCOOL.COM" 
+4;String   ;compare;Write a program in C to compare the length of two strings without using string library functions. Return 1 if the first string is longer, -1 if the second string is longer, and 0 if the two strings are the same length.`compare("Hello, it's me.", "You should go visit DWisCool.com") = -1 
+5;Math     ;reverse;Write a C program to reverse the digits of a given integer.`reverse(123) = 321`reverse(208478933) = 339874802`reverse(-73634) = -43637
+6;Math     ;palindrome;Write a C program to check whether an integer is a palindrome or not. An integer is a palindrome when it reads the same forward as backward. Return 1 if it is palindrome and return 0 if it is not.`palindrome(-121) = 0`palindrome(1220) = 0`palindrome(1221) = 1 
+7;Math     ;totalOne;Write a C program to count the total number of digit 1 appearing in all positive integers less than or equal to a given integer n.`totalOne(12) = 5 // (1), (1)0, (1)(1), (1)2 `totalOne(30) = 13
+8;Math     ;powerOfThree;Write a C programming to check if a given integer is a power of three. Return 1 if true, 0 if false.`powerOfThree(81) = 1`powerOfThree(45) = 0
+9;Math     ;nToN;Write a C programming to find the nth digit of number 1 to n.`nToN(12) = 1`nToN(7) = 7
+10;Loop     ;naturalSum;Write a C program to find the sum of the first n natural numbers.`naturalSum(10) = 55`naturalSum(7) = 28
+11;Loop     ;factorial;Write a C program to calculate the factorial of a given number.`factorial(3) = 6`factorial(5) = 120
+12;Loop     ;armstrong;Write a C program to check whether a given number is an Armstrong number or not, returning 1 if true and 0 if false. Armstrong number is a number that is equal to the sum of cubes of its digits.`armstrong(153) = 1`armstrong(300) = 0
+13;Loop     ;prime;Write a C program to determine whether a given number is prime or not, returning 1 if true and 0 if false.`prime(13) = 1`prime(8) = 0
+14;Loop     ;binary;Write a program in C to convert a decimal number into "binary" integer of 1s and 0s without using an array.`binary(25) = 11001`binary(40) = 101000
 15;Recursion;rSum;Write a program in C to calculate the sum of numbers from n1 to n2 using recursion.`rSum(1, 5) = 15;`rSum(5, 10) = 45;
 16;Recursion;digitSum;Write a program in C to find the sum of digits of a number using recursion.`digitSum(25) = 7`digitSum(3456) = 18
 17;Recursion;gcd;Write a program in C to find GCD of two numbers using recursion.`gcd(10, 50) = 10`gcd(28, 42) = 14
