@@ -16,10 +16,10 @@ A user can choose a problem from a problem set and read what it's about (descrip
 - time.h
 ## Instructions
 1. Get everything ready by using make!
-- make
-2. First, run server and then run client
-- make runserver (running the server)
-- make run (running the client)
+  - `make`
+2. First, run the server and then run the client
+  - `make runserver`
+  - `make run`
 3. The prompt will ask you a series of introductory questions!
 - What is your name?
 - Have you been on Bleetcode before? If so, enter your ID to return to your problem set progression.
