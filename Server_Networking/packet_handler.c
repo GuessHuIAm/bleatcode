@@ -30,6 +30,7 @@ void append_request(char *buff, char *request, struct client *curr_client) {
 }
 
 void handle_receive_packet(struct client *curr_client) {
+    pthread_mutex_lock(&curr_client->receive_buffer_lock);
     printf("handle_receive_packet\n");
     char *buff = curr_client->receive_buffer;
     char *request = buff;
@@ -38,7 +39,7 @@ void handle_receive_packet(struct client *curr_client) {
         found = 0;
         char *i;
         for (i = request; i <= buff + 1499; i++) {
-            if (*i == 15) { //End of packet delimeter
+            if (*i == 35) { //End of packet delimeter
                 *i = 0;
                 if (!curr_client->incomplete) {
                     curr_client->num_requests++;
@@ -71,6 +72,7 @@ void handle_receive_packet(struct client *curr_client) {
     }
     clean_buffer(curr_client);
     printf("handle_receive_packet O\n");
+    pthread_mutex_unlock(&curr_client->receive_buffer_lock);
 }
 
 void send_packet(int client_ID, int REQUEST_ID, char **params, int num_params) {
@@ -93,7 +95,7 @@ void send_packet(int client_ID, int REQUEST_ID, char **params, int num_params) {
         strcat(buffer, *(params + i));
     }
 
-    buffer[buffer_size + 4] = 15; //EOP
+    buffer[buffer_size + 4] = 35; //EOP
     buffer[buffer_size + 5] = 0;
 
     async_send(client_ID, buffer);

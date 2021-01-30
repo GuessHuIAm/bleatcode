@@ -20,7 +20,7 @@ int main() {
 	printf("Connection established\n");
 	sleep(5);
 	disconnect(); 
-	sleep(10);
-	//kill(getpid(), SIGINT);
+	sleep(5);
+	close(get_client()->socket);
 	return 0;
 }

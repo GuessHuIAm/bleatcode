@@ -35,7 +35,7 @@ void handle_receive_packet(struct client *curr_client) {
         found = 0;
         char *i;
         for (i = request; i <= buff + 1499; i++) {
-            if (*i == 15) { //End of packet delimeter
+            if (*i == 35) { //End of packet delimeter
                 *i = 0;
                 if (!curr_client->incomplete) {
                     curr_client->num_requests++;
@@ -75,7 +75,7 @@ void send_packet(int REQUEST_ID, char **params, int num_params) {
     for (i = 0; i < num_params; i++) {
         buffer_size += (strlen(*(params + i)) + 1);
     }
-    char buffer[buffer_size + 6];
+    char *buffer = malloc(sizeof(long) * (buffer_size + 6));
 
     char req_id[5];
 	sprintf(req_id, "%04d", REQUEST_ID);
@@ -88,17 +88,8 @@ void send_packet(int REQUEST_ID, char **params, int num_params) {
         strcat(*(params + i), del);
         strcat(buffer, *(params + i));
     }
-    buffer[buffer_size + 4] = 15; //EOP
+    buffer[buffer_size + 4] = 35; //EOP
     buffer[buffer_size + 5] = 0;
-
-    printf("GOBBLY GOOK: ");
-	i = 0;
-	while (*(buffer + i) != 15) {
-		printf("%c", *(buffer + i));
-        i++;
-	}
-	printf("\n");
-
 
     async_send(buffer);
 }

@@ -7,8 +7,8 @@
 
 void start_server() {
 	//Start the task handler in a separate thread
-	//pthread_t taskt;
-	//pthread_create(&taskt, NULL, start_task_handler, (void *)&taskt);
+	pthread_t taskt;
+	pthread_create(&taskt, NULL, start_task_handler, (void *)&taskt);
 	
 	//Start handling client connections in a separate thread
 	/*pthread_t connt;

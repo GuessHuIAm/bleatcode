@@ -13,6 +13,7 @@ void *start_task_handler(void *vargp) {
 			if (this_client->receive_buffer[0] != 0) {
 				printf("Something happened, num requests is %d\n", this_client->num_requests);
 				handle_receive_packet(this_client);
+				printf("Something happened, num requests is %d\n", this_client->num_requests);
 			}
 			if (this_client->num_requests > 100) {
 				//client may be trying to overwhelm server maliciously or connection is too unstable

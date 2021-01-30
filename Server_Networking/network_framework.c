@@ -49,12 +49,20 @@ void *send_function(void *p) {
 	struct send_struct *ps = (struct send_struct *)p;
 	printf("SENT DATA: ");
 	int i = 0;
-	while (*(ps->sdata + i) != 15) {
+	while (*(ps->sdata + i) != 0) {
 		printf("%c", *(ps->sdata + i));
 		i++;
 	}
 	printf("\n");
-	send(clients[ps->id]->socket, ps->sdata, strlen(ps->sdata), 0);
+	
+	int numBytes = send(clients[ps->id]->socket, ps->sdata, strlen(ps->sdata) + 1, 0);
+	while (numBytes < 1500) {
+		int newBytes = send(clients[ps->id]->socket, ps->sdata + numBytes, strlen(ps->sdata) - numBytes + 1, 0);
+		numBytes += newBytes;
+		if (!newBytes) {
+			break;
+		}
+	}
 	return NULL;
 }
 
@@ -69,14 +77,30 @@ void async_send(int client_ID, char *data) {
 void *receive_function(void *rclient) {
 	struct client *curr_client = (struct client *)rclient;
 	while (1) {
-		read(curr_client->socket, curr_client->receive_buffer, sizeof(curr_client->receive_buffer));
-		printf("READ DATA: %s\n", curr_client->receive_buffer);
+		int numBytes = read(curr_client->socket, curr_client->tcp_buffer, sizeof(curr_client->tcp_buffer));
+		pthread_mutex_lock(&curr_client->receive_buffer_lock);
+		curr_client->tcp_buffer[numBytes - 1] = 0;
+		strcpy(curr_client->receive_buffer, curr_client->tcp_buffer);
+		while (numBytes < 1500) {
+			int newBytes = read(curr_client->socket, curr_client->tcp_buffer, sizeof(curr_client->tcp_buffer));
+			numBytes += newBytes;
+			if (!newBytes) {
+				break;
+			}
+
+			curr_client->tcp_buffer[numBytes - 1] = 0;
+			strcat(curr_client->receive_buffer, curr_client->tcp_buffer);
+		}
+
+		printf("READ DATA: ");
 		int i = 0;
-		while (*(curr_client->receive_buffer + i) != 15) {
+		while (*(curr_client->receive_buffer + i) != 0) {
 			printf("%c", *(curr_client->receive_buffer + i));
 			i++;
 		}
 		printf("\n");
+		pthread_mutex_unlock(&curr_client->receive_buffer_lock); 
+
 		break;
 	}
 	return NULL;
@@ -127,7 +151,7 @@ void *handle_connections(void *vargp) {
 			printf("ACCEPT FAILED: %s\n", strerror(errno));
 			return NULL;
 		} else {
-			/*if (curr_index != -1 && clients[curr_index]->socket < 0) {
+			if (curr_index != -1 && clients[curr_index]->socket < 0) {
 				struct client new_client;
 				client_ID = -1 * clients[curr_index]->socket;
 				clients[client_ID] = &new_client;
@@ -136,6 +160,9 @@ void *handle_connections(void *vargp) {
 				clients[client_ID]->num_requests = 0;
 				clients[client_ID]->last_index = 0;
 				clients[client_ID]->num_params = 0;
+				pthread_mutex_init(&clients[client_ID]->receive_buffer_lock, NULL);
+				pthread_mutex_init(&clients[client_ID]->requests_lock, NULL);
+				pthread_mutex_init(&clients[client_ID]->num_requests_lock, NULL);
 				clients[curr_index]->socket = 0;
 				if (clients[curr_index - 1]->socket < 0) {
 					curr_index--;
@@ -150,32 +177,17 @@ void *handle_connections(void *vargp) {
 				clients[client_ID]->num_requests = 0;
 				clients[client_ID]->last_index = 0;
 				clients[client_ID]->num_params = 0;
+				pthread_mutex_init(&clients[client_ID]->receive_buffer_lock, NULL);
+				pthread_mutex_init(&clients[client_ID]->requests_lock, NULL);
+				pthread_mutex_init(&clients[client_ID]->num_requests_lock, NULL);
 				if (curr_index == curr_capacity - 1) {
 					resize_clients();
 				}
-			}*/
+			}
 
 			printf("Client %d connected\n", client_ID);
 
-			//async_receive(client_ID);
-			//struct client *curr_client = clients[client_ID];
-			//printf("SOCKET %d\n", curr_client->socket);
-			struct client curc;
-			struct client *curr_client = &curc;
-			curr_client->socket = new_socket;
-			clean_buffer(curr_client);
-			read(curr_client->socket, curr_client->receive_buffer, sizeof(curr_client->receive_buffer));
-			printf("READ DATA: %lu\n", strlen(curr_client->receive_buffer));
-			if (*(curr_client->receive_buffer)) {
-				printf("NOT NULL\n");
-			}
-			int i = 0;
-			while (*(curr_client->receive_buffer + i) != 15) {
-				printf("%c", *(curr_client->receive_buffer + i));
-				i++;
-			}
-			printf("\n");
-			close(curr_client->socket);
+			async_receive(client_ID);
 		}
 	}
 	return NULL;

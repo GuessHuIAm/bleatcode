@@ -17,19 +17,27 @@ void disconnect() {
 	int num_params = 0;
 	send_packet(DISCONNECT_REQUEST, params, num_params);
 
-	close(this_client->socket);
+	//close(this_client->socket);
 }
 
 void *send_function(void *p) {
 	char *ps = (char *)p;
 	printf("SENT DATA: ");
 	int i = 0;
-	while (*(ps + i) != 15) {
+	while (*(ps + i) != 0) {
 		printf("%c", *(ps + i));
 		i++;
 	}
 	printf("\n");
-	send(this_client->socket, ps, 6, 0);
+
+	int numBytes = send(this_client->socket, ps, strlen(ps) + 1, 0);
+	while (numBytes < 1500) {
+		int newBytes = send(this_client->socket, ps + numBytes, strlen(ps) - numBytes + 1, 0);
+		numBytes += newBytes;
+		if (!newBytes) {
+			break;
+		}
+	}
 	return NULL;
 }
 
@@ -41,14 +49,29 @@ void async_send(char *data) {
 void *receive_function(void *rclient) {
 	struct client *curr_client = (struct client *)rclient;
 	while (1) {
-		read(curr_client->socket, curr_client->receive_buffer, sizeof(curr_client->receive_buffer));
+		int numBytes = read(curr_client->socket, curr_client->tcp_buffer, sizeof(curr_client->receive_buffer));
+		pthread_mutex_lock(&curr_client->receive_buffer_lock);
+		curr_client->tcp_buffer[numBytes - 1] = 0;
+		strcpy(curr_client->receive_buffer, curr_client->tcp_buffer);
+		while (numBytes < 1500) {
+			int newBytes = read(curr_client->socket, curr_client->tcp_buffer, sizeof(curr_client->receive_buffer));
+			numBytes += newBytes;
+			if (!newBytes) {
+				break;
+			}
+
+			curr_client->tcp_buffer[numBytes - 1] = 0;
+			strcat(this_client->receive_buffer, curr_client->tcp_buffer);
+		}
+
 		printf("READ DATA: ");
 		int i = 0;
-		while (*(curr_client->receive_buffer + i) != 15) {
+		while (*(curr_client->receive_buffer + i) != 0) {
 			printf("%c", *(curr_client->receive_buffer + i));
 			i++;
 		}
 		printf("\n");
+		pthread_mutex_unlock(&curr_client->receive_buffer_lock);
 	}
 	return NULL;
 }
@@ -65,6 +88,9 @@ void connect_server() {
 	this_client->num_requests = 0;
 	this_client->last_index = 0;
 	this_client->num_params = 0;
+	pthread_mutex_init(&this_client->receive_buffer_lock, NULL);
+	pthread_mutex_init(&this_client->requests_lock, NULL);
+	pthread_mutex_init(&this_client->num_requests_lock, NULL);
 
 	//Create the client socket
 	if ((this_client->socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
